@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PatchTests.cs" />
     <Compile Include="ReduceRightTests.cs" />
     <Compile Include="ReduceLeftTests.cs" />
     <Compile Include="FlatMapTests.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="IsEmptyTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SliceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

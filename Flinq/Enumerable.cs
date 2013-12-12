@@ -100,17 +100,49 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            IEnumerator<TSource> _;
-            TSource __;
-            return IsEmpty(source, out _, out __);
+            using (var enumerator = source.GetEnumerator())
+            {
+                return !enumerator.MoveNext();
+            }
         }
 
-        private static bool IsEmpty<TSource>(IEnumerable<TSource> source, out IEnumerator<TSource> enumerator, out TSource head)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<TSource> Slice<TSource>(this IEnumerable<TSource> source, int from, int until)
         {
-            enumerator = source.GetEnumerator();
-            var isEmpty = !enumerator.MoveNext();
-            head = (isEmpty) ? default(TSource) : enumerator.Current;
-            return isEmpty;
+            return source.Skip(from).Take(until - from);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
+        {
+            using (var enumerator = source.GetEnumerator())
+            {
+                for (; ; )
+                {
+                    if (from <= 0) break;
+                    if (!enumerator.MoveNext()) break;
+                    yield return enumerator.Current;
+                    from--;
+                }
+
+                foreach (var thatElement in that)
+                {
+                    yield return thatElement;
+                }
+
+                for (; ; )
+                {
+                    if (replaced <= 0) break;
+                    if (!enumerator.MoveNext()) yield break;
+                    replaced--;
+                }
+
+                for (;;)
+                {
+                    if (!enumerator.MoveNext()) yield break;
+                    yield return enumerator.Current;
+                }
+            }
         }
     }
 }
