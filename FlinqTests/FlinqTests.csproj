@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReduceRightTests.cs" />
     <Compile Include="ReduceLeftTests.cs" />
     <Compile Include="FlatMapTests.cs" />
     <Compile Include="EnumerableSpy.cs" />

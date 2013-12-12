@@ -28,7 +28,7 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> fn)
         {
-            return source.Reverse().Aggregate(z, (b, a) => fn(a, b));
+            return FoldLeft(source.Reverse(), z, (b, a) => fn(a, b));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -89,6 +89,12 @@ namespace Flinq
             }
 
             return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> fn) where TSource : TResult
+        {
+            return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => fn(a, b));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

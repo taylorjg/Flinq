@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Flinq;
+﻿using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -15,37 +13,27 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(1 + 2 + 3));
         }
 
-        //internal class Employee
-        //{
-        //    public Employee(string firstName, string lastName)
-        //    {
-        //        FirstName = firstName;
-        //        LastName = lastName;
-        //    }
+        [Test]
+        public void ReduceLeftWorks2()
+        {
+            var actual = new[] { "A", "B", "C" }.ReduceLeft<string, string>((b, a) => b + a);
+            Assert.That(actual, Is.EqualTo("ABC"));
+        }
 
-        //    public string FirstName { get; set; }
-        //    public string LastName { get; set; }
-        //}
+        [Test]
+        public void ReduceLeftGivenAnEmptyListThrowsException()
+        {
+            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+            var ex = Assert.Throws<System.ArgumentException>(() => System.Linq.Enumerable.Empty<string>().ReduceLeft<string, string>((b, a) => b + a));
+            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
 
-        //internal class Manager : Employee
-        //{
-        //    public Manager(string firstName, string lastName, params Employee[] directReports)
-        //        : base(firstName, lastName)
-        //    {
-        //        DirectReports = directReports;
-        //    }
-
-        //    public Employee[] DirectReports { get; private set; }
-        //}
-
-        //[Test]
-        //public void FoldLeftWorks2()
-        //{
-        //    var e1 = new Employee("Jim", "Khana");
-        //    var e2 = new Employee("Percy", "Flage");
-        //    var m1 = new Manager("Lara", "Croft", e1, e2);
-
-        //    var employees = new[] {e1, e2, m1};
-        //}
+        [Test]
+        public void ReduceLeftGivenAListContainingASingleElementReturnsThatElement()
+        {
+            var actual = new[] {"A"}.ReduceLeft<string, string>((b, a) => b + a);
+            Assert.That(actual, Is.EqualTo("A"));
+        }
     }
 }
