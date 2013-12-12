@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReduceLeftTests.cs" />
     <Compile Include="FlatMapTests.cs" />
     <Compile Include="EnumerableSpy.cs" />
     <Compile Include="FoldLeftTests.cs" />
     <Compile Include="FoldRightTests.cs" />
     <Compile Include="ForEachTests.cs" />
+    <Compile Include="IndicesTests.cs" />
+    <Compile Include="IsEmptyTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

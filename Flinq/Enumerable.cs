@@ -20,15 +20,15 @@ namespace Flinq
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult seed, Func<TResult, TSource, TResult> fn)
+        public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> fn)
         {
-            return source.Aggregate(seed, fn);
+            return source.Aggregate(z, fn);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult seed, Func<TSource, TResult, TResult> fn)
+        public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> fn)
         {
-            return source.Reverse().Aggregate(seed, (b, a) => fn(a, b));
+            return source.Reverse().Aggregate(z, (b, a) => fn(a, b));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -49,6 +49,62 @@ namespace Flinq
         {
             var index = 0L;
             foreach (var a in source) fn(a, index++);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<int> Indices<TSource>(this IEnumerable<TSource> source)
+        {
+            var index = 0;
+            return source.Select(_ => index++);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEnumerable<long> IndicesLong<TSource>(this IEnumerable<TSource> source)
+        {
+            var index = 0L;
+            return source.Select(_ => index++);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
+        {
+            var e = source.GetEnumerator();
+
+            if (!e.MoveNext())
+            {
+                throw new ArgumentException("Sequence is empty.", "source");
+            }
+
+            var a = e.Current;
+            TResult r = a;
+
+            for (; ; )
+            {
+                if (!e.MoveNext())
+                {
+                    break;
+                }
+
+                r = fn(r, e.Current);
+            }
+
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
+        {
+            IEnumerator<TSource> _;
+            TSource __;
+            return IsEmpty(source, out _, out __);
+        }
+
+        private static bool IsEmpty<TSource>(IEnumerable<TSource> source, out IEnumerator<TSource> enumerator, out TSource head)
+        {
+            enumerator = source.GetEnumerator();
+            var isEmpty = !enumerator.MoveNext();
+            head = (isEmpty) ? default(TSource) : enumerator.Current;
+            return isEmpty;
         }
     }
 }

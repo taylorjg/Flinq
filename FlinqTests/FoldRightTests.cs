@@ -9,7 +9,7 @@ namespace FlinqTests
         [Test]
         public void FoldRightWorks()
         {
-            var actual = new[] { 1, 2, 3 }.FoldRight(0, (b, a) => b + a);
+            var actual = new[] { 1, 2, 3 }.FoldRight(0, (a, b) => b + a);
             Assert.That(actual, Is.EqualTo(1 + 2 + 3));
         }
 
