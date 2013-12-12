@@ -68,42 +68,28 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
         {
-            var e = source.GetEnumerator();
-
-            if (!e.MoveNext())
-            {
-                throw new ArgumentException("Sequence is empty.", "source");
-            }
-
-            var a = e.Current;
-            TResult r = a;
-
-            for (; ; )
+            using (var e = source.GetEnumerator())
             {
                 if (!e.MoveNext())
+                    throw new ArgumentException("Sequence is empty.", "source");
+
+                var a = e.Current;
+                TResult r = a;
+
+                for (; ; )
                 {
-                    break;
+                    if (!e.MoveNext()) break;
+                    r = fn(r, e.Current);
                 }
 
-                r = fn(r, e.Current);
+                return r;
             }
-
-            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> fn) where TSource : TResult
         {
             return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => fn(a, b));
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
-        {
-            using (var enumerator = source.GetEnumerator())
-            {
-                return !enumerator.MoveNext();
-            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -115,34 +101,39 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
         {
-            using (var enumerator = source.GetEnumerator())
+            using (var e = source.GetEnumerator())
             {
                 for (; ; )
                 {
                     if (from <= 0) break;
-                    if (!enumerator.MoveNext()) break;
-                    yield return enumerator.Current;
+                    if (!e.MoveNext()) break;
+                    yield return e.Current;
                     from--;
                 }
 
                 foreach (var thatElement in that)
-                {
                     yield return thatElement;
-                }
 
                 for (; ; )
                 {
                     if (replaced <= 0) break;
-                    if (!enumerator.MoveNext()) yield break;
+                    if (!e.MoveNext()) yield break;
                     replaced--;
                 }
 
                 for (;;)
                 {
-                    if (!enumerator.MoveNext()) yield break;
-                    yield return enumerator.Current;
+                    if (!e.MoveNext()) yield break;
+                    yield return e.Current;
                 }
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
+        {
+            using (var e = source.GetEnumerator())
+                return !e.MoveNext();
         }
     }
 }
