@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MkStringTests.cs" />
     <Compile Include="PatchTests.cs" />
     <Compile Include="ReduceRightTests.cs" />
     <Compile Include="ReduceLeftTests.cs" />

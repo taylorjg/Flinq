@@ -159,6 +159,24 @@ namespace Flinq
                 return !e.MoveNext();
         }
 
+        public static string MkString<TSource>(this IEnumerable<TSource> source)
+        {
+            return MkString(source, string.Empty, string.Empty, string.Empty);
+        }
+
+        public static string MkString<TSource>(this IEnumerable<TSource> source, string sep)
+        {
+            return MkString(source, string.Empty, sep, string.Empty);
+        }
+
+        public static string MkString<TSource>(this IEnumerable<TSource> source, string start, string sep, string end)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+
+            var middle = string.Join(sep, source);
+            return start + middle + end;
+        }
+
         private static class Error
         {
             public static Exception ArgumentNull(string paramName)
