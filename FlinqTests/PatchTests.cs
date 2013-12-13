@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Flinq;
 using NUnit.Framework;
 
@@ -7,20 +8,20 @@ namespace FlinqTests
     [TestFixture]
     internal class PatchTests
     {
+        // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+
         [Test]
         public void PatchGivenNullSourceSequenceThrowsException()
         {
-            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-            Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().Patch(0, new[] { 1, 2, 3 }, 0).ToList());
-            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().Patch(0, new[] { 1, 2, 3 }, 0).ToList());
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
         }
 
         [Test]
         public void PatchGivenNullThatSequenceThrowsException()
         {
-            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-            Assert.Throws<System.ArgumentNullException>(() => new[] {1, 2, 3}.Patch(0, null, 0).ToList());
-            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+            var ex = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.Patch(0, null, 0).ToList());
+            Assert.That(ex.ParamName, Is.EqualTo("that"));
         }
 
         [Test]
@@ -28,9 +29,7 @@ namespace FlinqTests
         {
             var source = new int[] {};
             var enumerableSpy = new EnumerableSpy<int>(source);
-            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
             enumerableSpy.Patch(0, new int[]{}, 0).ToList();
-            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
             Assert.That(enumerableSpy.NumCallsToDispose, Is.EqualTo(1));
         }
 

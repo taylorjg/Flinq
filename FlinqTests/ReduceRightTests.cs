@@ -1,4 +1,5 @@
-﻿using Flinq;
+﻿using System;
+using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -6,6 +7,31 @@ namespace FlinqTests
     [TestFixture]
     public class ReduceRightTests
     {
+        // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+
+        [Test]
+        public void ReduceRightGivenNullSourceSequenceThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().ReduceRight<int, int>((_, __) => _));
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
+
+        [Test]
+        public void ReduceRightGivenNullFnThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => new[] { 1, 2, 3 }.ReduceRight<int, int>(null));
+            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+        }
+
+        [Test]
+        public void ReduceRightDisposesOfTheEnumerator()
+        {
+            var source = new[] { 1, 2, 3 };
+            var enumerableSpy = new EnumerableSpy<int>(source);
+            enumerableSpy.ReduceRight<int, int>((_, __) => _);
+            Assert.That(enumerableSpy.NumCallsToDispose, Is.EqualTo(1));
+        }
+
         [Test]
         public void ReduceRightWorks()
         {
@@ -23,9 +49,7 @@ namespace FlinqTests
         [Test]
         public void ReduceRightGivenAnEmptyListThrowsException()
         {
-            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-            Assert.Throws<System.InvalidOperationException>(() => System.Linq.Enumerable.Empty<string>().ReduceRight<string, string>((a, b) => a + b));
-            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+            Assert.Throws<InvalidOperationException>(() => System.Linq.Enumerable.Empty<string>().ReduceRight<string, string>((a, b) => a + b));
         }
 
         [Test]

@@ -1,4 +1,5 @@
-﻿using Flinq;
+﻿using System;
+using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -6,10 +7,20 @@ namespace FlinqTests
     [TestFixture]
     public class ReduceLeftTests
     {
+        // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+
         [Test]
         public void ReduceLeftGivenNullSourceSequenceThrowsException()
         {
-            Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().ReduceLeft<int, int>((_, __) => _));
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().ReduceLeft<int, int>((_, __) => _));
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
+
+        [Test]
+        public void ReduceLeftGivenNullFnThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => new[] { 1, 2, 3 }.ReduceLeft<int, int>(null));
+            Assert.That(ex.ParamName, Is.EqualTo("fn"));
         }
 
         [Test]
@@ -38,9 +49,7 @@ namespace FlinqTests
         [Test]
         public void ReduceLeftGivenAnEmptyListThrowsException()
         {
-            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-            Assert.Throws<System.InvalidOperationException>(() => System.Linq.Enumerable.Empty<string>().ReduceLeft<string, string>((b, a) => b + a));
-            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+            Assert.Throws<InvalidOperationException>(() => System.Linq.Enumerable.Empty<string>().ReduceLeft<string, string>((b, a) => b + a));
         }
 
         [Test]

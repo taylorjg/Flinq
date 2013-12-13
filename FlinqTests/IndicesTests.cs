@@ -1,4 +1,5 @@
-﻿using Flinq;
+﻿using System;
+using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -6,6 +7,16 @@ namespace FlinqTests
     [TestFixture]
     internal class IndicesTests
     {
+        [Test]
+        public void IndicesGivenNullSourceSequenceThrowsException()
+        {
+            var ex1 = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().Indices());
+            Assert.That(ex1.ParamName, Is.EqualTo("source"));
+
+            var ex2 = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().IndicesLong());
+            Assert.That(ex2.ParamName, Is.EqualTo("source"));
+        }
+
         [Test]
         public void IndicesWorks()
         {

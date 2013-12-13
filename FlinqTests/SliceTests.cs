@@ -1,4 +1,5 @@
-﻿using Flinq;
+﻿using System;
+using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -6,6 +7,13 @@ namespace FlinqTests
     [TestFixture]
     internal class SliceTests
     {
+        [Test]
+        public void SliceGivenNullSourceSequenceThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().Slice(0, 0));
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
+
         [Test]
         public void SliceWorks()
         {

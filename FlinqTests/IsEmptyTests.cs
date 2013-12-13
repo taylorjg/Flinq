@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Flinq;
 
 namespace FlinqTests
@@ -9,7 +10,8 @@ namespace FlinqTests
         [Test]
         public void IsEmptyGivenNullSourceSequenceThrowsException()
         {
-            Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().IsEmpty());
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().IsEmpty());
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
         }
 
         [Test]

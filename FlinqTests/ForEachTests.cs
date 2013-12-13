@@ -9,6 +9,26 @@ namespace FlinqTests
     internal class ForEachTests
     {
         [Test]
+        public void ForEachGivenNullSourceSequenceThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().ForEach(_ => { }));
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
+
+        [Test]
+        public void ForEachGivenNullFnThrowsException()
+        {
+            var ex1 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int>));
+            Assert.That(ex1.ParamName, Is.EqualTo("fn"));
+
+            var ex2 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int, int>));
+            Assert.That(ex2.ParamName, Is.EqualTo("fn"));
+
+            var ex3 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int, long>));
+            Assert.That(ex3.ParamName, Is.EqualTo("fn"));
+        }
+
+        [Test]
         public void ForEachWorks()
         {
             var actual = new List<int>();

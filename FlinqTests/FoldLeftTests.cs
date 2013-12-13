@@ -1,4 +1,5 @@
-﻿using Flinq;
+﻿using System;
+using Flinq;
 using NUnit.Framework;
 
 namespace FlinqTests
@@ -6,6 +7,20 @@ namespace FlinqTests
     [TestFixture]
     public class FoldLeftTests
     {
+        [Test]
+        public void FoldLeftGivenNullSourceSequenceThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().FoldLeft<int, int>(0, (_, __) => _));
+            Assert.That(ex.ParamName, Is.EqualTo("source"));
+        }
+
+        [Test]
+        public void FoldLeftGivenNullFnThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => new[] { 1, 2, 3 }.FoldLeft(0, null));
+            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+        }
+
         [Test]
         public void FoldLeftWorks()
         {
