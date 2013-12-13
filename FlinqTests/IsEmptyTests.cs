@@ -7,6 +7,21 @@ namespace FlinqTests
     internal class IsEmptyTests
     {
         [Test]
+        public void IsEmptyGivenNullSequenceThrowsException()
+        {
+            Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().IsEmpty());
+        }
+
+        [Test]
+        public void IsEmptyDisposesOfTheEnumerator()
+        {
+            var source = new[] { 1, 2, 3 };
+            var enumerableSpy = new EnumerableSpy<int>(source);
+            enumerableSpy.IsEmpty();
+            Assert.That(enumerableSpy.NumCallsToDispose, Is.EqualTo(1));
+        }
+
+        [Test]
         public void IsEmptyReturnsTrueWhenGivenAnEmptyListOfValueType()
         {
             var actual = System.Linq.Enumerable.Empty<int>().IsEmpty();

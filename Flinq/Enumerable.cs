@@ -10,36 +10,54 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, TResult> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             return source.Select(fn);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TResult> FlatMap<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, IEnumerable<TResult>> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             return source.SelectMany(fn);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             return source.Aggregate(z, fn);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             return FoldLeft(source.Reverse(), z, (b, a) => fn(a, b));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             foreach (var a in source) fn(a);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, int> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             var index = 0;
             foreach (var a in source) fn(a, index++);
         }
@@ -47,6 +65,9 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, long> fn)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             var index = 0L;
             foreach (var a in source) fn(a, index++);
         }
@@ -54,6 +75,8 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<int> Indices<TSource>(this IEnumerable<TSource> source)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+
             var index = 0;
             return source.Select(_ => index++);
         }
@@ -61,6 +84,8 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<long> IndicesLong<TSource>(this IEnumerable<TSource> source)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+
             var index = 0L;
             return source.Select(_ => index++);
         }
@@ -68,10 +93,13 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             using (var e = source.GetEnumerator())
             {
                 if (!e.MoveNext())
-                    throw new ArgumentException("Sequence is empty.", "source");
+                    throw Error.NoElements();
 
                 var a = e.Current;
                 TResult r = a;
@@ -89,18 +117,25 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> fn) where TSource : TResult
         {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (fn == null) throw Error.ArgumentNull("fn");
+
             return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => fn(a, b));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TSource> Slice<TSource>(this IEnumerable<TSource> source, int from, int until)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+
             return source.Skip(from).Take(until - from);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+
             using (var e = source.GetEnumerator())
             {
                 for (; ; )
@@ -132,8 +167,23 @@ namespace Flinq
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
+            if (source == null) throw Error.ArgumentNull("source");
+
             using (var e = source.GetEnumerator())
                 return !e.MoveNext();
+        }
+
+        private static class Error
+        {
+            public static Exception ArgumentNull(string paramName)
+            {
+                return new ArgumentNullException(paramName);
+            }
+
+            public static Exception NoElements()
+            {
+                return new InvalidOperationException("Sequence contains no elements");
+            }
         }
     }
 }

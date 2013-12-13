@@ -24,9 +24,8 @@ namespace FlinqTests
         public void ReduceRightGivenAnEmptyListThrowsException()
         {
             // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-            var ex = Assert.Throws<System.ArgumentException>(() => System.Linq.Enumerable.Empty<string>().ReduceRight<string, string>((a, b) => a + b));
+            Assert.Throws<System.InvalidOperationException>(() => System.Linq.Enumerable.Empty<string>().ReduceRight<string, string>((a, b) => a + b));
             // ReSharper restore ReturnValueOfPureMethodIsNotUsed
-            Assert.That(ex.ParamName, Is.EqualTo("source"));
         }
 
         [Test]
