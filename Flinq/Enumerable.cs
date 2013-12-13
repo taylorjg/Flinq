@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Flinq
 {
     public static class Enumerable
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, TResult> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -16,7 +14,6 @@ namespace Flinq
             return source.Select(fn);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TResult> FlatMap<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, IEnumerable<TResult>> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -25,7 +22,6 @@ namespace Flinq
             return source.SelectMany(fn);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -34,7 +30,6 @@ namespace Flinq
             return source.Aggregate(z, fn);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -43,7 +38,6 @@ namespace Flinq
             return FoldLeft(source.Reverse(), z, (b, a) => fn(a, b));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -52,7 +46,6 @@ namespace Flinq
             foreach (var a in source) fn(a);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, int> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -62,7 +55,6 @@ namespace Flinq
             foreach (var a in source) fn(a, index++);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, long> fn)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -72,7 +64,6 @@ namespace Flinq
             foreach (var a in source) fn(a, index++);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<int> Indices<TSource>(this IEnumerable<TSource> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -81,7 +72,6 @@ namespace Flinq
             return source.Select(_ => index++);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<long> IndicesLong<TSource>(this IEnumerable<TSource> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -90,7 +80,6 @@ namespace Flinq
             return source.Select(_ => index++);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -114,7 +103,6 @@ namespace Flinq
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> fn) where TSource : TResult
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -123,7 +111,6 @@ namespace Flinq
             return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => fn(a, b));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TSource> Slice<TSource>(this IEnumerable<TSource> source, int from, int until)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -131,7 +118,6 @@ namespace Flinq
             return source.Skip(from).Take(until - from);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -165,7 +151,6 @@ namespace Flinq
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
