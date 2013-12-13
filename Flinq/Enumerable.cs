@@ -151,6 +151,12 @@ namespace Flinq
             }
         }
 
+        /// <summary>
+        /// Tests whether this sequence is empty.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The sequence of elements.</param>
+        /// <returns><code>true</code> if the sequence contain no elements, <code>false</code> otherwise.</returns>
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -159,16 +165,38 @@ namespace Flinq
                 return !e.MoveNext();
         }
 
+        /// <summary>
+        /// Displays all elements of this sequence in a string.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The sequence of elements to display.</param>
+        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.</returns>
         public static string MkString<TSource>(this IEnumerable<TSource> source)
         {
             return MkString(source, string.Empty, string.Empty, string.Empty);
         }
 
+        /// <summary>
+        /// Displays all elements of this sequence in a string using a separator string.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The sequence of elements to display.</param>
+        /// <param name="sep">The separator string.</param>
+        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
         public static string MkString<TSource>(this IEnumerable<TSource> source, string sep)
         {
             return MkString(source, string.Empty, sep, string.Empty);
         }
 
+        /// <summary>
+        /// Displays all elements of this sequence in a string using start, end, and separator strings.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The sequence of elements to display.</param>
+        /// <param name="start">The starting string.</param>
+        /// <param name="sep">The separator string.</param>
+        /// <param name="end">The ending string.</param>
+        /// <returns>A string representation of this sequence. The resulting string begins with the string start and ends with the string end. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
         public static string MkString<TSource>(this IEnumerable<TSource> source, string start, string sep, string end)
         {
             if (source == null) throw Error.ArgumentNull("source");
