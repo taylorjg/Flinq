@@ -135,6 +135,7 @@ namespace Flinq
         public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
         {
             if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
 
             using (var e = source.GetEnumerator())
             {

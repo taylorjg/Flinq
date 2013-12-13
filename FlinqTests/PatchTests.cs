@@ -8,10 +8,18 @@ namespace FlinqTests
     internal class PatchTests
     {
         [Test]
-        public void PatchGivenNullSequenceThrowsException()
+        public void PatchGivenNullSourceSequenceThrowsException()
         {
             // ReSharper disable ReturnValueOfPureMethodIsNotUsed
             Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().Patch(0, new[] { 1, 2, 3 }, 0).ToList());
+            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
+        }
+
+        [Test]
+        public void PatchGivenNullThatSequenceThrowsException()
+        {
+            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+            Assert.Throws<System.ArgumentNullException>(() => new[] {1, 2, 3}.Patch(0, null, 0).ToList());
             // ReSharper restore ReturnValueOfPureMethodIsNotUsed
         }
 

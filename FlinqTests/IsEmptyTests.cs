@@ -7,7 +7,7 @@ namespace FlinqTests
     internal class IsEmptyTests
     {
         [Test]
-        public void IsEmptyGivenNullSequenceThrowsException()
+        public void IsEmptyGivenNullSourceSequenceThrowsException()
         {
             Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().IsEmpty());
         }

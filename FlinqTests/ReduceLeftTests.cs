@@ -7,7 +7,7 @@ namespace FlinqTests
     public class ReduceLeftTests
     {
         [Test]
-        public void ReduceLeftGivenNullSequenceThrowsException()
+        public void ReduceLeftGivenNullSourceSequenceThrowsException()
         {
             Assert.Throws<System.ArgumentNullException>(() => Utils.NullSequence<int>().ReduceLeft<int, int>((_, __) => _));
         }
