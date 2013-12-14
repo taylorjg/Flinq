@@ -69,7 +69,7 @@ namespace Flinq
             if (source == null) throw Error.ArgumentNull("source");
 
             var index = 0;
-            return source.Select(_ => index++);
+            return source.Map(_ => index++);
         }
 
         public static IEnumerable<long> IndicesLong<TSource>(this IEnumerable<TSource> source)
@@ -77,7 +77,7 @@ namespace Flinq
             if (source == null) throw Error.ArgumentNull("source");
 
             var index = 0L;
-            return source.Select(_ => index++);
+            return source.Map(_ => index++);
         }
 
         public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
@@ -90,16 +90,15 @@ namespace Flinq
                 if (!e.MoveNext())
                     throw Error.NoElements();
 
-                var a = e.Current;
-                TResult r = a;
+                TResult b = e.Current;
 
                 for (; ; )
                 {
                     if (!e.MoveNext()) break;
-                    r = fn(r, e.Current);
+                    b = fn(b, e.Current);
                 }
 
-                return r;
+                return b;
             }
         }
 
@@ -127,10 +126,8 @@ namespace Flinq
             {
                 for (; ; )
                 {
-                    if (from <= 0) break;
-                    if (!e.MoveNext()) break;
+                    if (from-- <= 0 || !e.MoveNext()) break;
                     yield return e.Current;
-                    from--;
                 }
 
                 foreach (var thatElement in that)
@@ -138,9 +135,8 @@ namespace Flinq
 
                 for (; ; )
                 {
-                    if (replaced <= 0) break;
+                    if (replaced-- <= 0) break;
                     if (!e.MoveNext()) yield break;
-                    replaced--;
                 }
 
                 for (;;)
