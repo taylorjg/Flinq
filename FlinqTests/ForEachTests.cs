@@ -19,13 +19,13 @@ namespace FlinqTests
         public void ForEachGivenNullFnThrowsException()
         {
             var ex1 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int>));
-            Assert.That(ex1.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex1.ParamName, Is.EqualTo("f"));
 
             var ex2 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int, int>));
-            Assert.That(ex2.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex2.ParamName, Is.EqualTo("f"));
 
             var ex3 = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.ForEach(null as Action<int, long>));
-            Assert.That(ex3.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex3.ParamName, Is.EqualTo("f"));
         }
 
         [Test]

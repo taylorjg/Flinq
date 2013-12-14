@@ -20,7 +20,7 @@ namespace FlinqTests
         public void ReduceRightGivenNullFnThrowsException()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new[] { 1, 2, 3 }.ReduceRight<int, int>(null));
-            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex.ParamName, Is.EqualTo("op"));
         }
 
         [Test]

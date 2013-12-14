@@ -18,7 +18,7 @@ namespace FlinqTests
         public void FlatMapGivenNullFnThrowsException()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.FlatMap<int, int>(null));
-            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex.ParamName, Is.EqualTo("f"));
         }
 
         [Test]

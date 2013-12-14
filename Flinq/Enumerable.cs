@@ -6,62 +6,62 @@ namespace Flinq
 {
     public static class Enumerable
     {
-        public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, TResult> fn)
+        public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, TResult> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (f == null) throw Error.ArgumentNull("f");
 
-            return source.Select(fn);
+            return source.Select(f);
         }
 
-        public static IEnumerable<TResult> FlatMap<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, IEnumerable<TResult>> fn)
+        public static IEnumerable<TResult> FlatMap<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, IEnumerable<TResult>> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (f == null) throw Error.ArgumentNull("f");
 
-            return source.SelectMany(fn);
+            return source.SelectMany(f);
         }
 
-        public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> fn)
+        public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (op == null) throw Error.ArgumentNull("op");
 
-            return source.Aggregate(z, fn);
+            return source.Aggregate(z, op);
         }
 
-        public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> fn)
+        public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (op == null) throw Error.ArgumentNull("op");
 
-            return FoldLeft(source.Reverse(), z, (b, a) => fn(a, b));
+            return FoldLeft(source.Reverse(), z, (b, a) => op(a, b));
         }
 
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> fn)
+        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (f == null) throw Error.ArgumentNull("f");
 
-            foreach (var a in source) fn(a);
+            foreach (var a in source) f(a);
         }
 
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, int> fn)
+        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, int> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (f == null) throw Error.ArgumentNull("f");
 
             var index = 0;
-            foreach (var a in source) fn(a, index++);
+            foreach (var a in source) f(a, index++);
         }
 
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, long> fn)
+        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, long> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (f == null) throw Error.ArgumentNull("f");
 
             var index = 0L;
-            foreach (var a in source) fn(a, index++);
+            foreach (var a in source) f(a, index++);
         }
 
         public static IEnumerable<int> Indices<TSource>(this IEnumerable<TSource> source)
@@ -80,10 +80,19 @@ namespace Flinq
             return source.Map(_ => index++);
         }
 
-        public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> fn) where TSource : TResult
+        /// <summary>
+        /// Applies a binary operator to all elements of this sequence, going left to right.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="op">The binary operator.</param>
+        /// <returns>The result of inserting op between consecutive elements of this sequence, going left to right.</returns>
+        /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
+        public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> op) where TSource : TResult
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (op == null) throw Error.ArgumentNull("op");
 
             using (var e = source.GetEnumerator())
             {
@@ -95,21 +104,38 @@ namespace Flinq
                 for (; ; )
                 {
                     if (!e.MoveNext()) break;
-                    b = fn(b, e.Current);
+                    b = op(b, e.Current);
                 }
 
                 return b;
             }
         }
 
-        public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> fn) where TSource : TResult
+        /// <summary>
+        /// Applies a binary operator to all elements of this sequence, going right to left.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="op">The binary operator.</param>
+        /// <returns>The result of inserting op between consecutive elements of this sequence, going right to left.</returns>
+        /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
+        public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> op) where TSource : TResult
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (fn == null) throw Error.ArgumentNull("fn");
+            if (op == null) throw Error.ArgumentNull("op");
 
-            return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => fn(a, b));
+            return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => op(a, b));
         }
 
+        /// <summary>
+        /// Selects an interval of elements.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The sequence of elements.</param>
+        /// <param name="from">The index of the first element in the slice.</param>
+        /// <param name="until">The index of one beyond the last element in the slice.</param>
+        /// <returns></returns>
         public static IEnumerable<TSource> Slice<TSource>(this IEnumerable<TSource> source, int from, int until)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -117,10 +143,19 @@ namespace Flinq
             return source.Skip(from).Take(until - from);
         }
 
-        public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> that, int replaced)
+        /// <summary>
+        /// Produces a new sequence where a slice of elements in this sequence is replaced by another sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">The original sequence of elements.</param>
+        /// <param name="from">The index of the first replaced element.</param>
+        /// <param name="patch">The sequence of elements to replace a slice in the original sequence.</param>
+        /// <param name="replaced">The number of elements to drop in the original sequence.</param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> patch, int replaced)
         {
             if (source == null) throw Error.ArgumentNull("source");
-            if (that == null) throw Error.ArgumentNull("that");
+            if (patch == null) throw Error.ArgumentNull("patch");
 
             using (var e = source.GetEnumerator())
             {
@@ -130,7 +165,7 @@ namespace Flinq
                     yield return e.Current;
                 }
 
-                foreach (var thatElement in that)
+                foreach (var thatElement in patch)
                     yield return thatElement;
 
                 for (; ; )

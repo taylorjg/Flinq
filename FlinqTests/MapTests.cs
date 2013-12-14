@@ -21,7 +21,7 @@ namespace FlinqTests
         public void MapGivenNullFnThrowsException()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.Map<int, int>(null));
-            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex.ParamName, Is.EqualTo("f"));
         }
 
         [Test]

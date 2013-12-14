@@ -18,7 +18,7 @@ namespace FlinqTests
         public void FoldRightGivenNullFnThrowsException()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new[] { 1, 2, 3 }.FoldRight(0, null));
-            Assert.That(ex.ParamName, Is.EqualTo("fn"));
+            Assert.That(ex.ParamName, Is.EqualTo("op"));
         }
 
         [Test]
