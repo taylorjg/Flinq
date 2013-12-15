@@ -9,48 +9,35 @@ public static TResult ReduceLeft<TSource, TResult>(
 
 ###### Type Parameters
 
-*TSource*
+<dl>
 
+<dt><i>TSource</i></dt>
+<dd>
 The type of the elements in the input sequence.
+</dd>
 
-*TResult*
-
+<dt><i>TResult</i></dt>
+<dd>
 The type of the elements in the output sequence and the result type of the binary operator.
+</dd>
+</dl>
 
 ###### Parameters
 
 <dl>
+
 <dt><i>source</i></dt>
 <dd>
 Type: <code>IEnumerable&lt;TSource&gt;</code><br />
 The input sequence.
 </dd>
-</dl>
 
-<dl>
-<dt>*source*</dt>
+<dt><i>op</i></dt>
 <dd>
-Type: <code>IEnumerable&lt;TSource&gt;</code><br />
-The input sequence.
+Type: <code>Func&lt;TResult, TSource, TResult&gt;</code>
+The binary operator.
 </dd>
 </dl>
-
-*source*
-
-Type: <code>IEnumerable<TSource></code>
-
-The input sequence.
-
-*source*
-
-    Type: <code>IEnumerable<TSource></code>
-    The input sequence.
-
-*op*
-
-Type: <code>Func&lt;TResult, TSource, TResult&gt;</code>
-
-The binary operator.
 
 ###### Return Value
 
@@ -58,7 +45,6 @@ The result of inserting op between consecutive elements of this sequence, going 
 
 ##### Exceptions
 
-Type: <code>InvalidOperationException</code>
-
+Type: <code>InvalidOperationException</code><br />
 Thrown when the input sequence is empty.
 
