@@ -22,9 +22,10 @@ Applies a binary operator to all elements of this sequence, going left to right.
 ###### Return Value
 The result of inserting op between consecutive elements of this sequence, going left to right.
 ###### Exceptions
-Type: <code>System.InvalidOperationException</code>
-Thrown when the input sequence is empty.
+Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
+
 ---
+
 ``` C#
 public static TResult ReduceRight<TSource, TResult>(
         this IEnumerable<TSource> source,
@@ -49,9 +50,10 @@ Applies a binary operator to all elements of this sequence, going right to left.
 ###### Return Value
 The result of inserting op between consecutive elements of this sequence, going right to left.
 ###### Exceptions
-Type: <code>System.InvalidOperationException</code>
-Thrown when the input sequence is empty.
+Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
+
 ---
+
 ``` C#
 public static IEnumerable<TSource> Slice<TSource>(
         this IEnumerable<TSource> source,
@@ -76,7 +78,9 @@ Selects an interval of elements.
 </dl>
 ###### Return Value
 
+
 ---
+
 ``` C#
 public static IEnumerable<TSource> Patch<TSource>(
         this IEnumerable<TSource> source,
@@ -104,7 +108,9 @@ Produces a new sequence where a slice of elements in this sequence is replaced b
 </dl>
 ###### Return Value
 
+
 ---
+
 ``` C#
 public static Boolean IsEmpty<TSource>(
         this IEnumerable<TSource> source
@@ -123,7 +129,9 @@ Tests whether this sequence is empty.
 </dl>
 ###### Return Value
 true if the sequence contain no elements, false otherwise.
+
 ---
+
 ``` C#
 public static String MkString<TSource>(
         this IEnumerable<TSource> source
@@ -142,7 +150,9 @@ Displays all elements of this sequence in a string.
 </dl>
 ###### Return Value
 A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence follow each other without any separator string.
+
 ---
+
 ``` C#
 public static String MkString<TSource>(
         this IEnumerable<TSource> source,
@@ -164,7 +174,9 @@ Displays all elements of this sequence in a string using a separator string.
 </dl>
 ###### Return Value
 A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.
+
 ---
+
 ``` C#
 public static String MkString<TSource>(
         this IEnumerable<TSource> source,
