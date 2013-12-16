@@ -1,7 +1,7 @@
 ``` C#
-public static TResult ReduceLeft&lt;TSource, TResult&gt;(
-        this IEnumerable&lt;TSource&gt; source,
-        Func&lt;TResult, TSource, TResult&gt; op
+public static TResult ReduceLeft<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TResult, TSource, TResult> op
 )
 ```
 Applies a binary operator to all elements of this sequence, going left to right.
@@ -26,9 +26,9 @@ Type: <code>System.InvalidOperationException</code><br />
 Thrown when the input sequence is empty.
 ---
 ``` C#
-public static TResult ReduceRight&lt;TSource, TResult&gt;(
-        this IEnumerable&lt;TSource&gt; source,
-        Func&lt;TSource, TResult, TResult&gt; op
+public static TResult ReduceRight<TSource, TResult>(
+        this IEnumerable<TSource> source,
+        Func<TSource, TResult, TResult> op
 )
 ```
 Applies a binary operator to all elements of this sequence, going right to left.
@@ -53,8 +53,8 @@ Type: <code>System.InvalidOperationException</code><br />
 Thrown when the input sequence is empty.
 ---
 ``` C#
-public static IEnumerable&lt;TSource&gt; Slice&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source,
+public static IEnumerable<TSource> Slice<TSource>(
+        this IEnumerable<TSource> source,
         Int32 from,
         Int32 until
 )
@@ -78,10 +78,10 @@ Selects an interval of elements.
 
 ---
 ``` C#
-public static IEnumerable&lt;TSource&gt; Patch&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source,
+public static IEnumerable<TSource> Patch<TSource>(
+        this IEnumerable<TSource> source,
         Int32 from,
-        IEnumerable&lt;TSource&gt; patch,
+        IEnumerable<TSource> patch,
         Int32 replaced
 )
 ```
@@ -106,8 +106,8 @@ Produces a new sequence where a slice of elements in this sequence is replaced b
 
 ---
 ``` C#
-public static Boolean IsEmpty&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source
+public static Boolean IsEmpty<TSource>(
+        this IEnumerable<TSource> source
 )
 ```
 Tests whether this sequence is empty.
@@ -125,8 +125,8 @@ Tests whether this sequence is empty.
 true if the sequence contain no elements, false otherwise.
 ---
 ``` C#
-public static String MkString&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source
+public static String MkString<TSource>(
+        this IEnumerable<TSource> source
 )
 ```
 Displays all elements of this sequence in a string.
@@ -144,8 +144,8 @@ Displays all elements of this sequence in a string.
 A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence follow each other without any separator string.
 ---
 ``` C#
-public static String MkString&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source,
+public static String MkString<TSource>(
+        this IEnumerable<TSource> source,
         String sep
 )
 ```
@@ -166,8 +166,8 @@ Displays all elements of this sequence in a string using a separator string.
 A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.
 ---
 ``` C#
-public static String MkString&lt;TSource&gt;(
-        this IEnumerable&lt;TSource&gt; source,
+public static String MkString<TSource>(
+        this IEnumerable<TSource> source,
         String start,
         String sep,
         String end
