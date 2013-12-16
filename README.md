@@ -22,8 +22,7 @@ Applies a binary operator to all elements of this sequence, going left to right.
 ###### Return Value
 The result of inserting op between consecutive elements of this sequence, going left to right.
 ###### Exceptions
-Type: <code>System.InvalidOperationException</code><br />
-Thrown when the input sequence is empty.
+Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
 ---
 ``` C#
 public static TResult ReduceRight<TSource, TResult>(
@@ -49,8 +48,7 @@ Applies a binary operator to all elements of this sequence, going right to left.
 ###### Return Value
 The result of inserting op between consecutive elements of this sequence, going right to left.
 ###### Exceptions
-Type: <code>System.InvalidOperationException</code><br />
-Thrown when the input sequence is empty.
+Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
 ---
 ``` C#
 public static IEnumerable<TSource> Slice<TSource>(
