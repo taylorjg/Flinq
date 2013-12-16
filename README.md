@@ -57,8 +57,8 @@ Type: <code>System.InvalidOperationException</code><br />Thrown when the input s
 ``` C#
 public static IEnumerable<TSource> Slice<TSource>(
         this IEnumerable<TSource> source,
-        Int32 from,
-        Int32 until
+        int from,
+        int until
 )
 ```
 Selects an interval of elements.
@@ -84,9 +84,9 @@ Selects an interval of elements.
 ``` C#
 public static IEnumerable<TSource> Patch<TSource>(
         this IEnumerable<TSource> source,
-        Int32 from,
+        int from,
         IEnumerable<TSource> patch,
-        Int32 replaced
+        int replaced
 )
 ```
 Produces a new sequence where a slice of elements in this sequence is replaced by another sequence.
@@ -112,7 +112,7 @@ Produces a new sequence where a slice of elements in this sequence is replaced b
 ---
 
 ``` C#
-public static Boolean IsEmpty<TSource>(
+public static bool IsEmpty<TSource>(
         this IEnumerable<TSource> source
 )
 ```
@@ -133,7 +133,7 @@ true if the sequence contain no elements, false otherwise.
 ---
 
 ``` C#
-public static String MkString<TSource>(
+public static string MkString<TSource>(
         this IEnumerable<TSource> source
 )
 ```
@@ -154,9 +154,9 @@ A string representation of this sequence. In the resulting string the string rep
 ---
 
 ``` C#
-public static String MkString<TSource>(
+public static string MkString<TSource>(
         this IEnumerable<TSource> source,
-        String sep
+        string sep
 )
 ```
 Displays all elements of this sequence in a string using a separator string.
@@ -178,11 +178,11 @@ A string representation of this sequence. In the resulting string the string rep
 ---
 
 ``` C#
-public static String MkString<TSource>(
+public static string MkString<TSource>(
         this IEnumerable<TSource> source,
-        String start,
-        String sep,
-        String end
+        string start,
+        string sep,
+        string end
 )
 ```
 Displays all elements of this sequence in a string using start, end, and separator strings.
