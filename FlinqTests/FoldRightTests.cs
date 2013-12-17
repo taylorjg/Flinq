@@ -31,7 +31,7 @@ namespace FlinqTests
         [Test]
         public void FoldRightWorks2()
         {
-            var actual = new[] { 1, 2, 3 }.FoldRight("XXX", (a, b) => System.Convert.ToString(a) + b);
+            var actual = new[] { 1, 2, 3 }.FoldRight("XXX", (a, b) => Convert.ToString(a) + b);
             Assert.That(actual, Is.EqualTo("123XXX"));
         }
 

@@ -265,8 +265,7 @@ namespace Flinq
         {
             if (source == null) throw Error.ArgumentNull("source");
 
-            using (var e = source.GetEnumerator())
-                return !e.MoveNext();
+            return !source.Any();
         }
 
         /// <summary>

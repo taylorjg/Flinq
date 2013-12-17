@@ -31,7 +31,7 @@ namespace FlinqTests
         [Test]
         public void FoldLeftWorks2()
         {
-            var actual = new[] { 1, 2, 3 }.FoldLeft("XXX", (b, a) => b + System.Convert.ToString(a));
+            var actual = new[] { 1, 2, 3 }.FoldLeft("XXX", (b, a) => b + Convert.ToString(a));
             Assert.That(actual, Is.EqualTo("XXX123"));
         }
 
