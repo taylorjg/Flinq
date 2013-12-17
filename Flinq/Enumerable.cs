@@ -317,6 +317,19 @@ namespace Flinq
         /// <returns><code>true</code> if this collection has that as a prefix, <code>false</code> otherwise.</returns>
         public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
+            return StartsWith(source, that, EqualityComparer<A>.Default);
+        }
+
+        /// <summary>
+        /// Tests whether this list starts with the given sequence.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <returns><code>true</code> if this collection has that as a prefix, <code>false</code> otherwise.</returns>
+        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
 
@@ -324,11 +337,11 @@ namespace Flinq
             {
                 using (var thatEnumerator = that.GetEnumerator())
                 {
-                    for (;;)
+                    for (; ; )
                     {
                         if (!thatEnumerator.MoveNext()) return true;
                         if (!sourceEnumerator.MoveNext()) return false;
-                        if (!sourceEnumerator.Current.Equals(thatEnumerator.Current)) return false;
+                        if (!comparer.Equals(sourceEnumerator.Current, thatEnumerator.Current)) return false;
                     }
                 }
             }
