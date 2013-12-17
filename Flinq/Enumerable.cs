@@ -308,6 +308,32 @@ namespace Flinq
             return start + middle + end;
         }
 
+        /// <summary>
+        /// Tests whether this list starts with the given sequence.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <returns><code>true</code> if this collection has that as a prefix, <code>false</code> otherwise.</returns>
+        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+
+            using (var sourceEnumerator = source.GetEnumerator())
+            {
+                using (var thatEnumerator = that.GetEnumerator())
+                {
+                    for (;;)
+                    {
+                        if (!thatEnumerator.MoveNext()) return true;
+                        if (!sourceEnumerator.MoveNext()) return false;
+                        if (!sourceEnumerator.Current.Equals(thatEnumerator.Current)) return false;
+                    }
+                }
+            }
+        }
+
         private static class Error
         {
             public static Exception ArgumentNull(string paramName)

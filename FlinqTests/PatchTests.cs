@@ -18,7 +18,7 @@ namespace FlinqTests
         }
 
         [Test]
-        public void PatchGivenNullThatSequenceThrowsException()
+        public void PatchGivenNullPatchSequenceThrowsException()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.Patch(0, null, 0).ToList());
             Assert.That(ex.ParamName, Is.EqualTo("patch"));
@@ -39,7 +39,8 @@ namespace FlinqTests
         [TestCase(4, new int[] {}, 2, new[] {1, 2, 3, 4, 7, 8, 9, 10})]
         public void PatchGivenANonEmptySequenceWorks(int from, int[] patch, int replaced, int[] expected)
         {
-            var actual = System.Linq.Enumerable.Range(1, 10).Patch(from, patch, replaced);
+            var source = System.Linq.Enumerable.Range(1, 10);
+            var actual = source.Patch(from, patch, replaced);
             Assert.That(actual, Is.EqualTo(expected));
         }
 
@@ -49,7 +50,8 @@ namespace FlinqTests
         [TestCase(4, new int[] {}, 2, new int[] {})]
         public void PatchGivenAnEmptySequenceWorks(int from, int[] patch, int replaced, int[] expected)
         {
-            var actual = Utils.EmptySequence<int>().Patch(from, patch, replaced);
+            var source = Utils.EmptySequence<int>();
+            var actual = source.Patch(from, patch, replaced);
             Assert.That(actual, Is.EqualTo(expected));
         }
     }
