@@ -347,6 +347,37 @@ namespace Flinq
             }
         }
 
+        /// <summary>
+        /// Tests whether this list ends with the given sequence.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <returns><code>true</code> if this collection has that as a suffix, <code>false</code> otherwise.</returns>
+        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+
+            return EndsWith(source, that, EqualityComparer<A>.Default);
+        }
+
+        /// <summary>
+        /// Tests whether this list ends with the given sequence.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <returns><code>true</code> if this collection has that as a suffix, <code>false</code> otherwise.</returns>
+        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+
+            return StartsWith(source.Reverse(), that.Reverse(), comparer);
+        }
+
         private static class Error
         {
             public static Exception ArgumentNull(string paramName)
