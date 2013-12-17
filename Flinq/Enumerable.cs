@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace Flinq
 {
+    // I am deliberately using type parameters with names like A and B (as
+    // opposed to TSource and TResult) to match the Scala methods.
+    // ReSharper disable InconsistentNaming
+
     /// <summary>
     /// LINQ query operators inspired by Scala
     /// </summary>
@@ -13,12 +17,12 @@ namespace Flinq
         ///  Builds a new collection by applying a function to all elements of this list.
         /// (same as Select).
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The element type of the returned collection.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The element type of the returned collection.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="f">The function to apply to each element.</param>
         /// <returns>The output sequence.</returns>
-        public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source,  Func<TSource, TResult> f)
+        public static IEnumerable<B> Map<A, B>(this IEnumerable<A> source,  Func<A, B> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (f == null) throw Error.ArgumentNull("f");
@@ -30,12 +34,12 @@ namespace Flinq
         /// Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections.
         /// (same as SelectMany).
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The element type of the returned collection.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The element type of the returned collection.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="f">The function to apply to each element.</param>
         /// <returns>The output sequence.</returns>
-        public static IEnumerable<TResult> FlatMap<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> f)
+        public static IEnumerable<B> FlatMap<A, B>(this IEnumerable<A> source, Func<A, IEnumerable<B>> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (f == null) throw Error.ArgumentNull("f");
@@ -46,13 +50,13 @@ namespace Flinq
         /// <summary>
         /// Applies a binary operator to a start value and all elements of this list, going left to right.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="z">The start value.</param>
         /// <param name="op">The binary operator.</param>
         /// <returns>The result of inserting op between consecutive elements of this list, going left to right with the start value z on the left.</returns>
-        public static TResult FoldLeft<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TResult, TSource, TResult> op)
+        public static B FoldLeft<A, B>(this IEnumerable<A> source, B z, Func<B, A, B> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
@@ -63,13 +67,13 @@ namespace Flinq
         /// <summary>
         /// Applies a binary operator to all elements of this list and a start value, going right to left.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="z">The start value.</param>
         /// <param name="op">The binary operator.</param>
         /// <returns>The result of inserting op between consecutive elements of this list, going right to left with the start value z on the right.</returns>
-        public static TResult FoldRight<TSource, TResult>(this IEnumerable<TSource> source, TResult z, Func<TSource, TResult, TResult> op)
+        public static B FoldRight<A, B>(this IEnumerable<A> source, B z, Func<A, B, B> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
@@ -80,10 +84,10 @@ namespace Flinq
         /// <summary>
         /// Applies a function f to all elements of this list.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="f">The function that is applied for its side-effect to every element.</param>
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> f)
+        public static void ForEach<A>(this IEnumerable<A> source, Action<A> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (f == null) throw Error.ArgumentNull("f");
@@ -94,10 +98,10 @@ namespace Flinq
         /// <summary>
         /// Applies a function f to all elements of this list. Also passes an element index (int) to function f.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="f">The function that is applied for its side-effect to every element.</param>
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, int> f)
+        public static void ForEach<A>(this IEnumerable<A> source, Action<A, int> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (f == null) throw Error.ArgumentNull("f");
@@ -109,10 +113,10 @@ namespace Flinq
         /// <summary>
         /// Applies a function f to all elements of this list. Also passes an element index (long) to function f.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="f">The function that is applied for its side-effect to every element.</param>
-        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource, long> f)
+        public static void ForEach<A>(this IEnumerable<A> source, Action<A, long> f)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (f == null) throw Error.ArgumentNull("f");
@@ -124,10 +128,10 @@ namespace Flinq
         /// <summary>
         /// Produces the range of all indices (int) of this sequence.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <returns>A range of values from 0 to one less than the length of this list.</returns>
-        public static IEnumerable<int> Indices<TSource>(this IEnumerable<TSource> source)
+        public static IEnumerable<int> Indices<A>(this IEnumerable<A> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -138,10 +142,10 @@ namespace Flinq
         /// <summary>
         /// Produces the range of all indices (long) of this sequence.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <returns>A range of values from 0 to one less than the length of this list.</returns>
-        public static IEnumerable<long> IndicesLong<TSource>(this IEnumerable<TSource> source)
+        public static IEnumerable<long> IndicesLong<A>(this IEnumerable<A> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -152,13 +156,13 @@ namespace Flinq
         /// <summary>
         /// Applies a binary operator to all elements of this sequence, going left to right.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="op">The binary operator.</param>
         /// <returns>The result of inserting op between consecutive elements of this sequence, going left to right.</returns>
         /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
-        public static TResult ReduceLeft<TSource, TResult>(this IEnumerable<TSource> source, Func<TResult, TSource, TResult> op) where TSource : TResult
+        public static B ReduceLeft<A, B>(this IEnumerable<A> source, Func<B, A, B> op) where A : B
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
@@ -168,7 +172,7 @@ namespace Flinq
                 if (!e.MoveNext())
                     throw Error.NoElements();
 
-                TResult b = e.Current;
+                B b = e.Current;
 
                 for (; ; )
                 {
@@ -183,29 +187,29 @@ namespace Flinq
         /// <summary>
         /// Applies a binary operator to all elements of this sequence, going right to left.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements in the input sequence.</typeparam>
-        /// <typeparam name="TResult">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="op">The binary operator.</param>
         /// <returns>The result of inserting op between consecutive elements of this sequence, going right to left.</returns>
         /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
-        public static TResult ReduceRight<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult, TResult> op) where TSource : TResult
+        public static B ReduceRight<A, B>(this IEnumerable<A> source, Func<A, B, B> op) where A : B
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
 
-            return ReduceLeft<TSource, TResult>(source.Reverse(), (b, a) => op(a, b));
+            return ReduceLeft<A, B>(source.Reverse(), (b, a) => op(a, b));
         }
 
         /// <summary>
         /// Selects an interval of elements.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements.</param>
         /// <param name="from">The index of the first element in the slice.</param>
         /// <param name="until">The index of one beyond the last element in the slice.</param>
         /// <returns>The output sequence.</returns>
-        public static IEnumerable<TSource> Slice<TSource>(this IEnumerable<TSource> source, int from, int until)
+        public static IEnumerable<A> Slice<A>(this IEnumerable<A> source, int from, int until)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -215,13 +219,13 @@ namespace Flinq
         /// <summary>
         /// Produces a new sequence where a slice of elements in this sequence is replaced by another sequence.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The original sequence of elements.</param>
         /// <param name="from">The index of the first replaced element.</param>
         /// <param name="patch">The sequence of elements to replace a slice in the original sequence.</param>
         /// <param name="replaced">The number of elements to drop in the original sequence.</param>
         /// <returns>The output sequence.</returns>
-        public static IEnumerable<TSource> Patch<TSource>(this IEnumerable<TSource> source, int from, IEnumerable<TSource> patch, int replaced)
+        public static IEnumerable<A> Patch<A>(this IEnumerable<A> source, int from, IEnumerable<A> patch, int replaced)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (patch == null) throw Error.ArgumentNull("patch");
@@ -254,10 +258,10 @@ namespace Flinq
         /// <summary>
         /// Tests whether this sequence is empty.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements.</param>
         /// <returns><code>true</code> if the sequence contain no elements, <code>false</code> otherwise.</returns>
-        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
+        public static bool IsEmpty<A>(this IEnumerable<A> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -268,10 +272,10 @@ namespace Flinq
         /// <summary>
         /// Displays all elements of this sequence in a string.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
         /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.</returns>
-        public static string MkString<TSource>(this IEnumerable<TSource> source)
+        public static string MkString<A>(this IEnumerable<A> source)
         {
             return MkString(source, string.Empty, string.Empty, string.Empty);
         }
@@ -279,11 +283,11 @@ namespace Flinq
         /// <summary>
         /// Displays all elements of this sequence in a string using a separator string.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
         /// <param name="sep">The separator string.</param>
         /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
-        public static string MkString<TSource>(this IEnumerable<TSource> source, string sep)
+        public static string MkString<A>(this IEnumerable<A> source, string sep)
         {
             return MkString(source, string.Empty, sep, string.Empty);
         }
@@ -291,13 +295,13 @@ namespace Flinq
         /// <summary>
         /// Displays all elements of this sequence in a string using start, end, and separator strings.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
         /// <param name="start">The starting string.</param>
         /// <param name="sep">The separator string.</param>
         /// <param name="end">The ending string.</param>
         /// <returns>A string representation of this sequence. The resulting string begins with the string start and ends with the string end. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
-        public static string MkString<TSource>(this IEnumerable<TSource> source, string start, string sep, string end)
+        public static string MkString<A>(this IEnumerable<A> source, string start, string sep, string end)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
