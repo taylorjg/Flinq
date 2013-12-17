@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Flinq;
+using FlinqTests.Builders;
 using FlinqTests.SampleDomainClasses;
 using NUnit.Framework;
 
@@ -28,11 +27,11 @@ namespace FlinqTests
             Assert.That(ex.ParamName, Is.EqualTo("that"));
         }
 
-        [TestCase(1, new[] {10}, true)]
-        [TestCase(2, new[] {4}, false)]
+        [TestCase(1, new int[] {}, true)]
+        [TestCase(2, new[] {10}, true)]
         [TestCase(3, new[] {8, 9, 10}, true)]
-        [TestCase(4, new[] {4, 5, 6}, false)]
-        [TestCase(5, new int[] {}, true)]
+        [TestCase(4, new[] {4}, false)]
+        [TestCase(5, new[] {4, 5, 6}, false)]
         public void EndsWithGivenANonEmptySequenceWorks(int dummy, int[] that, bool expected)
         {
             var source = System.Linq.Enumerable.Range(1, 10);
@@ -40,11 +39,11 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new[] { 10 }, false)]
-        [TestCase(2, new[] { 4 }, false)]
-        [TestCase(3, new[] { 8, 9, 10 }, false)]
-        [TestCase(4, new[] { 4, 5, 6 }, false)]
-        [TestCase(5, new int[] { }, true)]
+        [TestCase(1, new int[] {}, true)]
+        [TestCase(2, new[] {10}, false)]
+        [TestCase(3, new[] {8, 9, 10}, false)]
+        [TestCase(4, new[] {4}, false)]
+        [TestCase(5, new[] {4, 5, 6}, false)]
         public void EndsWithGivenAnEmptySequenceWorks(int dummy, int[] that, bool expected)
         {
             var source = Utils.EmptySequence<int>();
@@ -53,38 +52,14 @@ namespace FlinqTests
         }
 
         [TestCase(1, "", true)]
-        [TestCase(1, "MSL", true)]
-        [TestCase(2, "SSL", false)]
+        [TestCase(2, "MSL", true)]
+        [TestCase(3, "SSL", false)]
         public void EndsWithUsingAnExplicitComparerWorks(int dummy, string deskSizes, bool expected)
         {
-            var source = MakeEmployeeList("LLLMSL");
-            var that = MakeEmployeeList(deskSizes);
+            var source = EmployeeCollectionBuilder.Build("LLLMSL");
+            var that = EmployeeCollectionBuilder.Build(deskSizes);
             var actual = source.EndsWith(that, new EmployeeDeskSizeComparer());
             Assert.That(actual, Is.EqualTo(expected));
-        }
-
-        private static IEnumerable<Employee> MakeEmployeeList(string deskSizes)
-        {
-            return deskSizes.Select((c, i) =>
-            {
-                var firstName = string.Format("FirstName{0}", i + 1);
-                var lastName = string.Format("LastName{0}", i + 1);
-                var deskSize = CharToDeskSize(c);
-                return new Employee(firstName, lastName, deskSize);
-            });
-        }
-
-        private static DeskSize CharToDeskSize(char c)
-        {
-            switch (c)
-            {
-                case 'S':
-                    return DeskSize.Small;
-                case 'M':
-                    return DeskSize.Medium;
-                default:
-                    return DeskSize.Large;
-            }
         }
     }
 }

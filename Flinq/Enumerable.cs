@@ -14,8 +14,7 @@ namespace Flinq
     public static class Enumerable
     {
         /// <summary>
-        ///  Builds a new collection by applying a function to all elements of this list.
-        /// (same as Select).
+        ///  Builds a new collection by applying a function to all elements of this list (same as Select).
         /// </summary>
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <typeparam name="B">The element type of the returned collection.</typeparam>
@@ -31,8 +30,7 @@ namespace Flinq
         }
 
         /// <summary>
-        /// Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections.
-        /// (same as SelectMany).
+        /// Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections (same as SelectMany).
         /// </summary>
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <typeparam name="B">The element type of the returned collection.</typeparam>
@@ -78,7 +76,7 @@ namespace Flinq
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
 
-            return FoldLeft(source.Reverse(), z, (b, a) => op(a, b));
+            return source.Reverse().FoldLeft(z, (b, a) => op(a, b));
         }
 
         /// <summary>
@@ -198,7 +196,7 @@ namespace Flinq
             if (source == null) throw Error.ArgumentNull("source");
             if (op == null) throw Error.ArgumentNull("op");
 
-            return ReduceLeft<A, B>(source.Reverse(), (b, a) => op(a, b));
+            return source.Reverse().ReduceLeft<A, B>((b, a) => op(a, b));
         }
 
         /// <summary>
@@ -276,7 +274,7 @@ namespace Flinq
         /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.</returns>
         public static string MkString<A>(this IEnumerable<A> source)
         {
-            return MkString(source, string.Empty, string.Empty, string.Empty);
+            return source.MkString(string.Empty, string.Empty, string.Empty);
         }
 
         /// <summary>
@@ -285,10 +283,10 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
         /// <param name="sep">The separator string.</param>
-        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
+        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
         public static string MkString<A>(this IEnumerable<A> source, string sep)
         {
-            return MkString(source, string.Empty, sep, string.Empty);
+            return source.MkString(string.Empty, sep, string.Empty);
         }
 
         /// <summary>
@@ -299,7 +297,7 @@ namespace Flinq
         /// <param name="start">The starting string.</param>
         /// <param name="sep">The separator string.</param>
         /// <param name="end">The ending string.</param>
-        /// <returns>A string representation of this sequence. The resulting string begins with the string start and ends with the string end. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string sep.</returns>
+        /// <returns>A string representation of this sequence. The resulting string begins with the string <paramref name="start" /> and ends with the string <paramref name="end" />. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
         public static string MkString<A>(this IEnumerable<A> source, string start, string sep, string end)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -314,10 +312,10 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <returns><code>true</code> if this collection has that as a prefix, <code>false</code> otherwise.</returns>
+        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
         public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
-            return StartsWith(source, that, EqualityComparer<A>.Default);
+            return source.StartsWith(that, EqualityComparer<A>.Default);
         }
 
         /// <summary>
@@ -327,7 +325,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
-        /// <returns><code>true</code> if this collection has that as a prefix, <code>false</code> otherwise.</returns>
+        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
         public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -353,13 +351,10 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <returns><code>true</code> if this collection has that as a suffix, <code>false</code> otherwise.</returns>
+        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
         public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
-            if (source == null) throw Error.ArgumentNull("source");
-            if (that == null) throw Error.ArgumentNull("that");
-
-            return EndsWith(source, that, EqualityComparer<A>.Default);
+            return source.EndsWith(that, EqualityComparer<A>.Default);
         }
 
         /// <summary>
@@ -369,13 +364,52 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
-        /// <returns><code>true</code> if this collection has that as a suffix, <code>false</code> otherwise.</returns>
+        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
         public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
 
-            return StartsWith(source.Reverse(), that.Reverse(), comparer);
+            return source.Reverse().StartsWith(that.Reverse(), comparer);
+        }
+
+        /// <summary>
+        /// Tests whether this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
+        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        {
+            return source.ContainsSlice(that, EqualityComparer<A>.Default);
+        }
+
+        /// <summary>
+        /// Tests whether this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
+        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+
+            // TODO: If source is indexable, then we could/should employ the Knuth–Morris–Pratt algorithm
+            // http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+
+            // ReSharper disable PossibleMultipleEnumeration
+            var seq = source;
+            for (; ; )
+            {
+                if (seq.IsEmpty()) return false;
+                if (seq.StartsWith(that, comparer)) return true;
+                seq = seq.Skip(1);
+            }
+            // ReSharper restore PossibleMultipleEnumeration
         }
 
         private static class Error

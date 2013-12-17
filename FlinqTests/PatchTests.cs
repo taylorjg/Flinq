@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Flinq;
 using NUnit.Framework;
@@ -13,14 +14,18 @@ namespace FlinqTests
         [Test]
         public void PatchGivenNullSourceSequenceThrowsException()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => Utils.NullSequence<int>().Patch(0, new[] { 1, 2, 3 }, 0).ToList());
+            var source = Utils.NullSequence<int>();
+            var patch = new[] {1, 2, 3};
+            var ex = Assert.Throws<ArgumentNullException>(() => source.Patch(0, patch, 0).ToList());
             Assert.That(ex.ParamName, Is.EqualTo("source"));
         }
 
         [Test]
         public void PatchGivenNullPatchSequenceThrowsException()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => new[] {1, 2, 3}.Patch(0, null, 0).ToList());
+            var source = new[] {1, 2, 3};
+            var patch = Utils.NullSequence<int>();
+            var ex = Assert.Throws<ArgumentNullException>(() => source.Patch(0, patch, 0).ToList());
             Assert.That(ex.ParamName, Is.EqualTo("patch"));
         }
 
@@ -28,8 +33,9 @@ namespace FlinqTests
         public void PatchDisposesOfTheEnumerator()
         {
             var source = Utils.EmptySequence<int>();
+            var patch = Utils.EmptySequence<int>();
             var enumerableSpy = new EnumerableSpy<int>(source);
-            enumerableSpy.Patch(0, Utils.EmptySequence<int>(), 0).ToList();
+            enumerableSpy.Patch(0, patch, 0).ToList();
             Assert.That(enumerableSpy.NumCallsToDispose, Is.EqualTo(1));
         }
 

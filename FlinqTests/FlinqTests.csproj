@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\EmployeeCollectionBuilder.cs" />
+    <Compile Include="ContainsSliceTests.cs" />
     <Compile Include="EndsWithTests.cs" />
     <Compile Include="MkStringTests.cs" />
     <Compile Include="PatchTests.cs" />
