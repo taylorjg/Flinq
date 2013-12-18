@@ -402,38 +402,38 @@ namespace Flinq
         }
 
         /// <summary>
-        /// 
+        /// Finds first index where this list contains a given sequence as a slice.
         /// </summary>
-        /// <typeparam name="A"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="that"></param>
-        /// <returns></returns>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.IndexOfSlice(that, 0, EqualityComparer<A>.Default);
         }
 
         /// <summary>
-        /// 
+        /// Finds first index where this list contains a given sequence as a slice.
         /// </summary>
-        /// <typeparam name="A"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="that"></param>
-        /// <param name="comparer"></param>
-        /// <returns></returns>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             return source.IndexOfSlice(that, 0, comparer);
         }
 
         /// <summary>
-        /// 
+        /// Finds first index after or at a start index where this list contains a given sequence as a slice.
         /// </summary>
-        /// <typeparam name="A"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="that"></param>
-        /// <param name="from"></param>
-        /// <returns></returns>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from)
         {
             return source.IndexOfSlice(that, from, EqualityComparer<A>.Default);
@@ -459,7 +459,7 @@ namespace Flinq
             // ReSharper disable PossibleMultipleEnumeration
             if (that.IsEmpty()) return 0;
 
-            var index = 0;
+            var index = from;
             var seq = source.Skip(from);
             for (; ; )
             {

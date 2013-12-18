@@ -61,6 +61,15 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(expected));
         }
 
+        [TestCase(1, new[] {1, 2}, 2, 5)]
+        [TestCase(2, new[] {2, 7}, 4, -1)]
+        public void IndexOfSliceSpecifyingFromWorks(int dummy, int[] that, int from, int expected)
+        {
+            var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
+            var actual = source.IndexOfSlice(that, from);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
         [Test]
         public void IndexOfSliceGivenTrickyCaseWorks()
         {
