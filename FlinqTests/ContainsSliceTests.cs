@@ -51,5 +51,14 @@ namespace FlinqTests
             var actual = source.ContainsSlice(that, new EmployeeDeskSizeComparer());
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void ContainsSliceEmptySequenceContainsEmptySequence()
+        {
+            var source = Utils.EmptySequence<int>();
+            var that = Utils.EmptySequence<int>();
+            var actual = source.ContainsSlice(that);
+            Assert.That(actual, Is.True);
+        }
     }
 }

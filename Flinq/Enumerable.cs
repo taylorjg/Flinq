@@ -402,14 +402,21 @@ namespace Flinq
             // http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
 
             // ReSharper disable PossibleMultipleEnumeration
+            if (that.IsEmpty()) return true;
+
             var seq = source;
             for (; ; )
             {
                 if (seq.IsEmpty()) return false;
                 if (seq.StartsWith(that, comparer)) return true;
-                seq = seq.Skip(1);
+                seq = seq.Tail();
             }
             // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        private static IEnumerable<A> Tail<A>(this IEnumerable<A> source)
+        {
+            return source.Skip(1);
         }
 
         private static class Error
