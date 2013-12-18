@@ -49,6 +49,7 @@
     <Compile Include="Builders\EmployeeCollectionBuilder.cs" />
     <Compile Include="ContainsSliceTests.cs" />
     <Compile Include="EndsWithTests.cs" />
+    <Compile Include="IndexOfSliceTests.cs" />
     <Compile Include="MkStringTests.cs" />
     <Compile Include="PatchTests.cs" />
     <Compile Include="ReduceRightTests.cs" />
