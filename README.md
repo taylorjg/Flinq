@@ -4,7 +4,8 @@ public static IEnumerable<B> Map<A, B>(
         Func<A, B> f
 )
 ```
-Builds a new collection by applying a function to all elements of this list (same as Select).
+Builds a new collection by applying a function to all elements of this list.
+            (same as Select).
 ###### Type Parameters
 <dl>
 <dt><i>A</i></dt>
@@ -30,7 +31,8 @@ public static IEnumerable<B> FlatMap<A, B>(
         Func<A, System.Collections.Generic.IEnumerable`1[B]> f
 )
 ```
-Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections (same as SelectMany).
+Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections.
+            (same as SelectMany).
 ###### Type Parameters
 <dl>
 <dt><i>A</i></dt>
@@ -346,7 +348,7 @@ Tests whether this sequence is empty.
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence of elements.</dd>
 </dl>
 ###### Return Value
-<code>true</code> if the sequence contain no elements, <code>false</code> otherwise.
+true if the sequence contain no elements, false otherwise.
 
 ---
 
@@ -367,7 +369,7 @@ Displays all elements of this sequence in a string.
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence of elements to display.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.
+A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence follow each other without any separator string.
 
 ---
 
@@ -391,7 +393,7 @@ Displays all elements of this sequence in a string using a separator string.
 <dd>Type: <code>System.String</code><br />The separator string.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string *sep*.
+A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.
 
 ---
 
@@ -421,265 +423,4 @@ Displays all elements of this sequence in a string using start, end, and separat
 <dd>Type: <code>System.String</code><br />The ending string.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. The resulting string begins with the string *start* and ends with the string *end*. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string *sep*.
-
----
-
-``` C#
-public static bool StartsWith<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that
-)
-```
-Tests whether this list starts with the given sequence.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this collection has *that* as a prefix, <code>false</code> otherwise.
-
----
-
-``` C#
-public static bool StartsWith<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        IEqualityComparer<A> comparer
-)
-```
-Tests whether this list starts with the given sequence.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this collection has *that* as a prefix, <code>false</code> otherwise.
-
----
-
-``` C#
-public static bool EndsWith<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that
-)
-```
-Tests whether this list ends with the given sequence.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this collection has *that* as a suffix, <code>false</code> otherwise.
-
----
-
-``` C#
-public static bool EndsWith<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        IEqualityComparer<A> comparer
-)
-```
-Tests whether this list ends with the given sequence.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this collection has *that* as a suffix, <code>false</code> otherwise.
-
----
-
-``` C#
-public static bool ContainsSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that
-)
-```
-Tests whether this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this list contains a slice with the same elements as *that*, otherwise <code>false</code>.
-
----
-
-``` C#
-public static bool ContainsSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        IEqualityComparer<A> comparer
-)
-```
-Tests whether this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-<code>true</code> if this list contains a slice with the same elements as *that*, otherwise <code>false</code>.
-
----
-
-``` C#
-public static int IndexOfSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that
-)
-```
-Finds first index where this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-</dl>
-###### Return Value
-The first index such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
-
----
-
-``` C#
-public static int IndexOfSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        IEqualityComparer<A> comparer
-)
-```
-Finds first index where this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-The first index such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
-
----
-
-``` C#
-public static int IndexOfSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        int from
-)
-```
-Finds first index where this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Int32</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-The first index such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
-
----
-
-``` C#
-public static int IndexOfSlice<A>(
-        this IEnumerable<A> source,
-        IEnumerable<A> that,
-        int from,
-        IEqualityComparer<A> comparer
-)
-```
-Finds first index after or at a start index where this list contains a given sequence as a slice.
-###### Type Parameters
-<dl>
-<dt><i>A</i></dt>
-<dd>The type of the elements in the input sequence.</dd>
-</dl>
-###### Parameters
-<dl>
-<dt><i>source</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The input sequence.</dd>
-<dt><i>that</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
-<dt><i>from</i></dt>
-<dd>Type: <code>System.Int32</code><br />The start index.</dd>
-<dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
-</dl>
-###### Return Value
-The first index >= *from* such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
+A string representation of this sequence. The resulting string begins with the string start and ends with the string end. Inside, the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.

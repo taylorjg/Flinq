@@ -324,7 +324,7 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
         public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
@@ -363,7 +363,7 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
         public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
@@ -391,7 +391,7 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
         public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
@@ -419,7 +419,7 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
@@ -446,7 +446,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <param name="from">The start index.</param>
-        /// <param name="comparer">An IEqualityComparer&lt;A&gt; to use to compare elements.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
         {
