@@ -4,8 +4,7 @@ public static IEnumerable<B> Map<A, B>(
         Func<A, B> f
 )
 ```
-Builds a new collection by applying a function to all elements of this list.
-            (same as Select).
+Builds a new collection by applying a function to all elements of this list (same as Select).
 ###### Type Parameters
 <dl>
 <dt><i>A</i></dt>
@@ -31,8 +30,7 @@ public static IEnumerable<B> FlatMap<A, B>(
         Func<A, System.Collections.Generic.IEnumerable`1[B]> f
 )
 ```
-Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections.
-            (same as SelectMany).
+Builds a new collection by applying a function to all elements of this list and using the elements of the resulting collections (same as SelectMany).
 ###### Type Parameters
 <dl>
 <dt><i>A</i></dt>
@@ -77,7 +75,7 @@ Applies a binary operator to a start value and all elements of this list, going 
 <dd>Type: <code>System.Func&lt;B, A, B&gt;</code><br />The binary operator.</dd>
 </dl>
 ###### Return Value
-The result of inserting op between consecutive elements of this list, going left to right with the start value z on the left.
+The result of inserting *op* between consecutive elements of this list, going left to right with the start value *z* on the left.
 
 ---
 
@@ -106,7 +104,7 @@ Applies a binary operator to all elements of this list and a start value, going 
 <dd>Type: <code>System.Func&lt;A, B, B&gt;</code><br />The binary operator.</dd>
 </dl>
 ###### Return Value
-The result of inserting op between consecutive elements of this list, going right to left with the start value z on the right.
+The result of inserting *op* between consecutive elements of this list, going right to left with the start value *z* on the right.
 
 ---
 
@@ -240,7 +238,7 @@ Applies a binary operator to all elements of this sequence, going left to right.
 <dd>Type: <code>System.Func&lt;B, A, B&gt;</code><br />The binary operator.</dd>
 </dl>
 ###### Return Value
-The result of inserting op between consecutive elements of this sequence, going left to right.
+The result of inserting *op* between consecutive elements of this sequence, going left to right.
 ###### Exceptions
 Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
 
@@ -268,7 +266,7 @@ Applies a binary operator to all elements of this sequence, going right to left.
 <dd>Type: <code>System.Func&lt;A, B, B&gt;</code><br />The binary operator.</dd>
 </dl>
 ###### Return Value
-The result of inserting op between consecutive elements of this sequence, going right to left.
+The result of inserting *op* between consecutive elements of this sequence, going right to left.
 ###### Exceptions
 Type: <code>System.InvalidOperationException</code><br />Thrown when the input sequence is empty.
 
@@ -348,7 +346,7 @@ Tests whether this sequence is empty.
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence of elements.</dd>
 </dl>
 ###### Return Value
-true if the sequence contain no elements, false otherwise.
+<code>true</code> if the sequence contain no elements, <code>false</code> otherwise.
 
 ---
 
@@ -369,7 +367,7 @@ Displays all elements of this sequence in a string.
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence of elements to display.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence follow each other without any separator string.
+A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.
 
 ---
 
@@ -393,7 +391,7 @@ Displays all elements of this sequence in a string using a separator string.
 <dd>Type: <code>System.String</code><br />The separator string.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. In the resulting string the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.
+A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string *sep*.
 
 ---
 
@@ -423,4 +421,4 @@ Displays all elements of this sequence in a string using start, end, and separat
 <dd>Type: <code>System.String</code><br />The ending string.</dd>
 </dl>
 ###### Return Value
-A string representation of this sequence. The resulting string begins with the string start and ends with the string end. Inside, the string representations (w.r.t. the method ToString) of all elements of this sequence are separated by the string sep.
+A string representation of this sequence. The resulting string begins with the string *start* and ends with the string *end*. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string *sep*.

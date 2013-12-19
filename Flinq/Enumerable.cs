@@ -53,7 +53,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="z">The start value.</param>
         /// <param name="op">The binary operator.</param>
-        /// <returns>The result of inserting op between consecutive elements of this list, going left to right with the start value z on the left.</returns>
+        /// <returns>The result of inserting <paramref name="op" /> between consecutive elements of this list, going left to right with the start value <paramref name="z" /> on the left.</returns>
         public static B FoldLeft<A, B>(this IEnumerable<A> source, B z, Func<B, A, B> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -70,7 +70,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="z">The start value.</param>
         /// <param name="op">The binary operator.</param>
-        /// <returns>The result of inserting op between consecutive elements of this list, going right to left with the start value z on the right.</returns>
+        /// <returns>The result of inserting <paramref name="op" /> between consecutive elements of this list, going right to left with the start value <paramref name="z" /> on the right.</returns>
         public static B FoldRight<A, B>(this IEnumerable<A> source, B z, Func<A, B, B> op)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -158,7 +158,7 @@ namespace Flinq
         /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="op">The binary operator.</param>
-        /// <returns>The result of inserting op between consecutive elements of this sequence, going left to right.</returns>
+        /// <returns>The result of inserting <paramref name="op" /> between consecutive elements of this sequence, going left to right.</returns>
         /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
         public static B ReduceLeft<A, B>(this IEnumerable<A> source, Func<B, A, B> op) where A : B
         {
@@ -189,7 +189,7 @@ namespace Flinq
         /// <typeparam name="B">The type of the elements in the output sequence and the result type of the binary operator.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="op">The binary operator.</param>
-        /// <returns>The result of inserting op between consecutive elements of this sequence, going right to left.</returns>
+        /// <returns>The result of inserting <paramref name="op" /> between consecutive elements of this sequence, going right to left.</returns>
         /// <exception cref="System.InvalidOperationException">Thrown when the input sequence is empty.</exception>
         public static B ReduceRight<A, B>(this IEnumerable<A> source, Func<A, B, B> op) where A : B
         {
@@ -313,7 +313,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
-        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        internal static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.StartsWith(that, EqualityComparer<A>.Default);
         }
@@ -326,7 +326,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
-        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        internal static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -352,7 +352,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
-        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        internal static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.EndsWith(that, EqualityComparer<A>.Default);
         }
@@ -365,7 +365,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
-        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        internal static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -380,7 +380,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
-        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        internal static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.ContainsSlice(that, EqualityComparer<A>.Default);
         }
@@ -393,7 +393,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
-        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        internal static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -408,7 +408,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.IndexOfSlice(that, 0, EqualityComparer<A>.Default);
         }
@@ -421,7 +421,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             return source.IndexOfSlice(that, 0, comparer);
         }
@@ -434,7 +434,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="from">The start index.</param>
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from)
+        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from)
         {
             return source.IndexOfSlice(that, from, EqualityComparer<A>.Default);
         }
@@ -448,7 +448,7 @@ namespace Flinq
         /// <param name="from">The start index.</param>
         /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
+        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -468,6 +468,23 @@ namespace Flinq
                 seq = seq.Tail();
                 index++;
             }
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+
+            // ReSharper disable PossibleMultipleEnumeration
+            var result = source.Reverse().IndexOfSlice(that.Reverse());
+
+            if (result >= 0)
+            {
+                result = source.Count() - that.Count() - result;
+            }
+
+            return result;
             // ReSharper restore PossibleMultipleEnumeration
         }
 
