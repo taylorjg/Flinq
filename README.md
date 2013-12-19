@@ -469,7 +469,7 @@ Tests whether this list starts with the given sequence.
 <dt><i>that</i></dt>
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 <code>true</code> if this collection has *that* as a prefix, <code>false</code> otherwise.
@@ -520,7 +520,7 @@ Tests whether this list ends with the given sequence.
 <dt><i>that</i></dt>
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 <code>true</code> if this collection has *that* as a suffix, <code>false</code> otherwise.
@@ -571,7 +571,7 @@ Tests whether this list contains a given sequence as a slice.
 <dt><i>that</i></dt>
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 <code>true</code> if this list contains a slice with the same elements as *that*, otherwise <code>false</code>.
@@ -622,7 +622,7 @@ Finds first index where this list contains a given sequence as a slice.
 <dt><i>that</i></dt>
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 The first index such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
@@ -649,7 +649,7 @@ Finds first index where this list contains a given sequence as a slice.
 <dt><i>that</i></dt>
 <dd>Type: <code>System.Collections.Generic.IEnumerable&lt;A&gt;</code><br />The sequence to test.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Int32</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Int32</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 The first index such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
@@ -679,7 +679,7 @@ Finds first index after or at a start index where this list contains a given seq
 <dt><i>from</i></dt>
 <dd>Type: <code>System.Int32</code><br />The start index.</dd>
 <dt><i>comparer</i></dt>
-<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An IEqualityComparer<A> to use to compare elements.</dd>
+<dd>Type: <code>System.Collections.Generic.IEqualityComparer&lt;A&gt;</code><br />An <code>IEqualityComparer<A></code> to use to compare elements.</dd>
 </dl>
 ###### Return Value
 The first index >= *from* such that the elements of this list starting at this index match the elements of sequence *that*, or -1 of no such subsequence exists.
