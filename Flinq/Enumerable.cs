@@ -481,7 +481,22 @@ namespace Flinq
         internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             // ReSharper disable PossibleMultipleEnumeration
-            return source.LastIndexOfSlice(that, source.Count());
+            return source.LastIndexOfSlice(that, source.Count(), EqualityComparer<A>.Default);
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        /// <summary>
+        /// Finds last index where this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <returns>The last index such that the elements of this list starting a this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
+        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        {
+            // ReSharper disable PossibleMultipleEnumeration
+            return source.LastIndexOfSlice(that, source.Count(), comparer);
             // ReSharper restore PossibleMultipleEnumeration
         }
 
@@ -495,6 +510,20 @@ namespace Flinq
         /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end)
         {
+            return source.LastIndexOfSlice(that, end, EqualityComparer<A>.Default);
+        }
+
+        /// <summary>
+        /// Finds last index before or at a given end index where this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="end">The end index.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
+        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
+        {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
 
@@ -504,9 +533,9 @@ namespace Flinq
 
             if (thatLength == 0) return sourceLength;
 
-            var skipAmount = sourceLength - end;
+            var skipAmount = Math.Max(sourceLength - end - 1, 0);
             var reversedSource = source.Reverse().Skip(skipAmount);
-            var result = reversedSource.IndexOfSlice(that.Reverse());
+            var result = reversedSource.IndexOfSlice(that.Reverse(), comparer);
 
             if (result >= 0)
             {
