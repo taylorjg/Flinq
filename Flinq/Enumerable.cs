@@ -374,6 +374,33 @@ namespace Flinq
         }
 
         /// <summary>
+        /// Tests whether this list contains a given value as an element.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="elem">The element to test.</param>
+        /// <returns><code>true</code> if this list has an element that is equal (as determined by the default comparer) to <paramref name="elem" />, <code>false</code> otherwise.</returns>
+        internal static bool Contains<A>(this IEnumerable<A> source, A elem)
+        {
+            return source.Contains(elem, EqualityComparer<A>.Default);
+        }
+
+        /// <summary>
+        /// Tests whether this list contains a given value as an element.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="elem">The element to test.</param>
+        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <returns><code>true</code> if this list has an element that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, <code>false</code> otherwise.</returns>
+        internal static bool Contains<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+
+            return source.Any(e => comparer.Equals(e, elem));
+        }
+
+        /// <summary>
         /// Tests whether this list contains a given sequence as a slice.
         /// </summary>
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>

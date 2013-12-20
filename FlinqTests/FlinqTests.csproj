@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Builders\EmployeeCollectionBuilder.cs" />
     <Compile Include="ContainsSliceTests.cs" />
+    <Compile Include="ContainsTests.cs" />
     <Compile Include="EndsWithTests.cs" />
     <Compile Include="IndexOfSliceTests.cs" />
     <Compile Include="LastIndexOfSliceTests.cs" />

@@ -8,13 +8,15 @@ namespace FlinqTests.Builders
     {
         public static IEnumerable<Employee> Build(string deskSizes)
         {
-            return deskSizes.Select((c, i) =>
-            {
-                var firstName = string.Format("FirstName{0}", i + 1);
-                var lastName = string.Format("LastName{0}", i + 1);
-                var deskSize = CharToDeskSize(c);
-                return new Employee(firstName, lastName, deskSize);
-            });
+            return deskSizes.Select(EmployeeWithDeskSize);
+        }
+
+        public static Employee EmployeeWithDeskSize(char c, int index = 1)
+        {
+            var firstName = string.Format("FirstName{0}", index + 1);
+            var lastName = string.Format("LastName{0}", index + 1);
+            var deskSize = CharToDeskSize(c);
+            return new Employee(firstName, lastName, deskSize);
         }
 
         private static DeskSize CharToDeskSize(char c)
