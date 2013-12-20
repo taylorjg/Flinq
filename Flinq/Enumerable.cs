@@ -471,17 +471,46 @@ namespace Flinq
             // ReSharper restore PossibleMultipleEnumeration
         }
 
+        /// <summary>
+        /// Finds last index where this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <returns>The last index such that the elements of this list starting a this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        {
+            // ReSharper disable PossibleMultipleEnumeration
+            return source.LastIndexOfSlice(that, source.Count());
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        /// <summary>
+        /// Finds last index before or at a given end index where this list contains a given sequence as a slice.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="that">The sequence to test.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
+        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
 
             // ReSharper disable PossibleMultipleEnumeration
-            var result = source.Reverse().IndexOfSlice(that.Reverse());
+            var sourceLength = source.Count();
+            var thatLength = that.Count();
+
+            if (thatLength == 0) return sourceLength;
+
+            var skipAmount = sourceLength - end;
+            var reversedSource = source.Reverse().Skip(skipAmount);
+            var result = reversedSource.IndexOfSlice(that.Reverse());
 
             if (result >= 0)
             {
-                result = source.Count() - that.Count() - result;
+                result = sourceLength - thatLength - result - skipAmount;
             }
 
             return result;
