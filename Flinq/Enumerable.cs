@@ -456,17 +456,21 @@ namespace Flinq
             if (p == null) throw Error.ArgumentNull("p");
 
             var index = Math.Max(from, 0);
-            using (var e = source.Skip(from).GetEnumerator())
+
+            using (var e = source.GetEnumerator())
             {
-                for (; ; )
+                for (;;)
                 {
-                    if (!e.MoveNext()) break;
-                    if (p(e.Current)) return index;
-                    index++;
+                    if (!e.MoveNext()) return -1;
+
+                    if (from > 0) from--;
+                    else
+                    {
+                        if (p(e.Current)) return index;
+                        index++;
+                    }
                 }
             }
-
-            return -1;
         }
 
         /// <summary>
