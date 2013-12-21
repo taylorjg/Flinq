@@ -42,6 +42,7 @@ namespace FlinqTests
         [TestCase(1, 1, 0, 0)]
         [TestCase(2, 1, 2, 5)]
         [TestCase(3, 11, 0, -1)]
+        [TestCase(4, 3, 100, -1)]
         public void IndexOfSpecifiyingFromWorks(int dummy, int elem, int from, int expected)
         {
             var source = new[] {1, 2, 3, 4, 5, 1, 2, 3, 4, 5};

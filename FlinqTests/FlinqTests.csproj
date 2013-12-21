@@ -53,6 +53,7 @@
     <Compile Include="IndexOfSliceTests.cs" />
     <Compile Include="IndexOfTests.cs" />
     <Compile Include="LastIndexOfSliceTests.cs" />
+    <Compile Include="LastIndexOfTests.cs" />
     <Compile Include="MkStringTests.cs" />
     <Compile Include="PatchTests.cs" />
     <Compile Include="ReduceRightTests.cs" />
