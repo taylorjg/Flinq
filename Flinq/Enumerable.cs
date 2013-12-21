@@ -431,6 +431,45 @@ namespace Flinq
         }
 
         /// <summary>
+        /// Finds index of first element satisfying some predicate.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="p">The predicate used to test elements.</param>
+        /// <returns>The index of the first element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
+        internal static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
+        {
+            return source.IndexWhere(p, 0);
+        }
+
+        /// <summary>
+        /// Finds index of the first element satisfying some predicate after or at some start index.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="p">The predicate used to test elements.</param>
+        /// <param name="from">The start index.</param>
+        /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
+        internal static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int from)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (p == null) throw Error.ArgumentNull("p");
+
+            var index = Math.Max(from, 0);
+            using (var e = source.Skip(from).GetEnumerator())
+            {
+                for (; ; )
+                {
+                    if (!e.MoveNext()) break;
+                    if (p(e.Current)) return index;
+                    index++;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
         /// Finds index of first occurrence of some value in this list.
         /// </summary>
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
@@ -479,21 +518,9 @@ namespace Flinq
         /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
         internal static int IndexOf<A>(this IEnumerable<A> source, A elem, int from, IEqualityComparer<A> comparer)
         {
-            if (source == null) throw Error.ArgumentNull("source");
             if (comparer == null) comparer = EqualityComparer<A>.Default;
 
-            var index = Math.Max(from, 0);
-            using (var e = source.Skip(from).GetEnumerator())
-            {
-                for (;;)
-                {
-                    if (!e.MoveNext()) break;
-                    if (comparer.Equals(e.Current, elem)) return index;
-                    index++;
-                }
-            }
-
-            return -1;
+            return source.IndexWhere(a => comparer.Equals(a, elem), from);
         }
 
         /// <summary>
