@@ -474,6 +474,48 @@ namespace Flinq
         }
 
         /// <summary>
+        /// Finds index of last element satisfying some predicate.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="p">The predicate used to test elements.</param>
+        /// <returns>The index of the last element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
+        internal static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
+        {
+            // ReSharper disable PossibleMultipleEnumeration
+            return source.LastIndexWhere(p, source.Count());
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        /// <summary>
+        /// Finds index of last element satisfying some predicate before or at given end index.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="p">The predicate used to test elements.</param>
+        /// <param name="end">The end index.</param>
+        /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that satisfies the predicate p, or -1, if none exists.</returns>
+        internal static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int end)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+
+            // ReSharper disable PossibleMultipleEnumeration
+            var sourceLength = source.Count();
+
+            var skipAmount = Math.Max(sourceLength - end - 1, 0);
+            var reversedSource = source.Reverse().Skip(skipAmount);
+            var result = reversedSource.IndexWhere(p);
+
+            if (result >= 0)
+            {
+                result = sourceLength - result - skipAmount - 1;
+            }
+
+            return result;
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        /// <summary>
         /// Finds index of first occurrence of some value in this list.
         /// </summary>
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
