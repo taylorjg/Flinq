@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Contains method" Url="html/d256e925-40ed-8d3d-cd98-ddf509c4e8b9.htm" />
+  <HelpKINode Title="ContainsSlice method" Url="html/404a8957-d784-de04-a750-809aaa0e91d6.htm" />
+  <HelpKINode Title="EndsWith method" Url="html/935ac398-78f6-6018-fff1-f4fa2303bf67.htm" />
+  <HelpKINode Title="Enumerable class">
+    <HelpKINode Title="Enumerable Class" Url="html/88f4bf92-cbd3-a9b4-8fde-cb5539f66ce0.htm" />
+    <HelpKINode Title="Enumerable Members" Url="html/f98642e1-47bc-f33a-4c88-f7bf969042e2.htm" />
+    <HelpKINode Title="about Enumerable class" Url="html/88f4bf92-cbd3-a9b4-8fde-cb5539f66ce0.htm" />
+    <HelpKINode Title="all members" Url="html/f98642e1-47bc-f33a-4c88-f7bf969042e2.htm" />
+    <HelpKINode Title="methods" Url="html/52722be6-4449-28e8-32bc-53e055e9f141.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Enumerable.Contains method" Url="html/d256e925-40ed-8d3d-cd98-ddf509c4e8b9.htm" />
+  <HelpKINode Title="Enumerable.ContainsSlice method" Url="html/404a8957-d784-de04-a750-809aaa0e91d6.htm" />
+  <HelpKINode Title="Enumerable.EndsWith method" Url="html/935ac398-78f6-6018-fff1-f4fa2303bf67.htm" />
+  <HelpKINode Title="Enumerable.FlatMap(Of A, B) method" Url="html/b76b8cdc-b308-968f-4d03-37fb153d5a86.htm" />
+  <HelpKINode Title="Enumerable.FlatMap&lt;A, B&gt; method" Url="html/b76b8cdc-b308-968f-4d03-37fb153d5a86.htm" />
+  <HelpKINode Title="Enumerable.FoldLeft(Of A, B) method" Url="html/834ef470-6873-f43e-74e1-993e066fff28.htm" />
+  <HelpKINode Title="Enumerable.FoldLeft&lt;A, B&gt; method" Url="html/834ef470-6873-f43e-74e1-993e066fff28.htm" />
+  <HelpKINode Title="Enumerable.FoldRight(Of A, B) method" Url="html/13215dae-b016-1b8c-f2ad-4c335bbcce53.htm" />
+  <HelpKINode Title="Enumerable.FoldRight&lt;A, B&gt; method" Url="html/13215dae-b016-1b8c-f2ad-4c335bbcce53.htm" />
+  <HelpKINode Title="Enumerable.ForEach method" Url="html/886d233b-3f4f-fe18-b689-fbf43b133daf.htm" />
+  <HelpKINode Title="Enumerable.IndexOf method" Url="html/a43b12e5-4412-3ba7-1fb7-9360d68b8b87.htm" />
+  <HelpKINode Title="Enumerable.IndexOfSlice method" Url="html/03091acc-3bb8-d8eb-3b1d-7301c633e350.htm" />
+  <HelpKINode Title="Enumerable.IndexWhere method" Url="html/be5a10f7-0d57-f1bc-4697-dc78206f9201.htm" />
+  <HelpKINode Title="Enumerable.Indices(Of A) method" Url="html/f44e683a-0dbd-ec29-ec44-6be9b57e860e.htm" />
+  <HelpKINode Title="Enumerable.Indices&lt;A&gt; method" Url="html/f44e683a-0dbd-ec29-ec44-6be9b57e860e.htm" />
+  <HelpKINode Title="Enumerable.IndicesLong(Of A) method" Url="html/9e8d862e-a392-2b13-547a-8d6fa925fa1b.htm" />
+  <HelpKINode Title="Enumerable.IndicesLong&lt;A&gt; method" Url="html/9e8d862e-a392-2b13-547a-8d6fa925fa1b.htm" />
+  <HelpKINode Title="Enumerable.IsEmpty(Of A) method" Url="html/78d4513d-12cd-5de6-0c3f-9597640bc894.htm" />
+  <HelpKINode Title="Enumerable.IsEmpty&lt;A&gt; method" Url="html/78d4513d-12cd-5de6-0c3f-9597640bc894.htm" />
+  <HelpKINode Title="Enumerable.LastIndexOf method" Url="html/8248ee45-6767-0e6e-9bc0-38c0ed26ae2f.htm" />
+  <HelpKINode Title="Enumerable.LastIndexOfSlice method" Url="html/057adb43-78f2-f68d-6c64-98da16dbf9e3.htm" />
+  <HelpKINode Title="Enumerable.LastIndexWhere method" Url="html/d90264ad-b217-8df2-57cf-c43f7f930a23.htm" />
+  <HelpKINode Title="Enumerable.Map(Of A, B) method" Url="html/e5187f8d-8111-80d7-8ea6-d51ff0f572f9.htm" />
+  <HelpKINode Title="Enumerable.Map&lt;A, B&gt; method" Url="html/e5187f8d-8111-80d7-8ea6-d51ff0f572f9.htm" />
+  <HelpKINode Title="Enumerable.MkString method" Url="html/cb0d63ac-8d71-5f8c-0b38-a5ed1aea1891.htm" />
+  <HelpKINode Title="Enumerable.Patch(Of A) method" Url="html/424122ed-99c6-3d40-eefd-0ec6e82a5aff.htm" />
+  <HelpKINode Title="Enumerable.Patch&lt;A&gt; method" Url="html/424122ed-99c6-3d40-eefd-0ec6e82a5aff.htm" />
+  <HelpKINode Title="Enumerable.ReduceLeft(Of A, B) method" Url="html/ef2875be-d737-1e50-cf63-7b2865d6f1cc.htm" />
+  <HelpKINode Title="Enumerable.ReduceLeft&lt;A, B&gt; method" Url="html/ef2875be-d737-1e50-cf63-7b2865d6f1cc.htm" />
+  <HelpKINode Title="Enumerable.ReduceRight(Of A, B) method" Url="html/97c9068d-1d9d-a201-b2c0-cba80458de14.htm" />
+  <HelpKINode Title="Enumerable.ReduceRight&lt;A, B&gt; method" Url="html/97c9068d-1d9d-a201-b2c0-cba80458de14.htm" />
+  <HelpKINode Title="Enumerable.Slice(Of A) method" Url="html/627199ff-5d9d-0bd0-e99c-c64f96103442.htm" />
+  <HelpKINode Title="Enumerable.Slice&lt;A&gt; method" Url="html/627199ff-5d9d-0bd0-e99c-c64f96103442.htm" />
+  <HelpKINode Title="Enumerable.SplitAt(Of A) method" Url="html/6e5ff332-e38d-47c2-021a-9d1e14df413d.htm" />
+  <HelpKINode Title="Enumerable.SplitAt&lt;A&gt; method" Url="html/6e5ff332-e38d-47c2-021a-9d1e14df413d.htm" />
+  <HelpKINode Title="Enumerable.StartsWith method" Url="html/57c76989-171e-f9a1-8b5a-e4976f6061b7.htm" />
+  <HelpKINode Title="FlatMap(Of A, B) method" Url="html/b76b8cdc-b308-968f-4d03-37fb153d5a86.htm" />
+  <HelpKINode Title="FlatMap&lt;A, B&gt; method" Url="html/b76b8cdc-b308-968f-4d03-37fb153d5a86.htm" />
+  <HelpKINode Title="Flinq namespace" Url="html/db679257-2674-7250-73bf-0ff8fe2905bf.htm" />
+  <HelpKINode Title="Flinq.Enumerable class">
+    <HelpKINode Title="Enumerable Class" Url="html/88f4bf92-cbd3-a9b4-8fde-cb5539f66ce0.htm" />
+    <HelpKINode Title="Enumerable Members" Url="html/f98642e1-47bc-f33a-4c88-f7bf969042e2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FoldLeft(Of A, B) method" Url="html/834ef470-6873-f43e-74e1-993e066fff28.htm" />
+  <HelpKINode Title="FoldLeft&lt;A, B&gt; method" Url="html/834ef470-6873-f43e-74e1-993e066fff28.htm" />
+  <HelpKINode Title="FoldRight(Of A, B) method" Url="html/13215dae-b016-1b8c-f2ad-4c335bbcce53.htm" />
+  <HelpKINode Title="FoldRight&lt;A, B&gt; method" Url="html/13215dae-b016-1b8c-f2ad-4c335bbcce53.htm" />
+  <HelpKINode Title="ForEach method" Url="html/886d233b-3f4f-fe18-b689-fbf43b133daf.htm" />
+  <HelpKINode Title="IndexOf method" Url="html/a43b12e5-4412-3ba7-1fb7-9360d68b8b87.htm" />
+  <HelpKINode Title="IndexOfSlice method" Url="html/03091acc-3bb8-d8eb-3b1d-7301c633e350.htm" />
+  <HelpKINode Title="IndexWhere method" Url="html/be5a10f7-0d57-f1bc-4697-dc78206f9201.htm" />
+  <HelpKINode Title="Indices(Of A) method" Url="html/f44e683a-0dbd-ec29-ec44-6be9b57e860e.htm" />
+  <HelpKINode Title="Indices&lt;A&gt; method" Url="html/f44e683a-0dbd-ec29-ec44-6be9b57e860e.htm" />
+  <HelpKINode Title="IndicesLong(Of A) method" Url="html/9e8d862e-a392-2b13-547a-8d6fa925fa1b.htm" />
+  <HelpKINode Title="IndicesLong&lt;A&gt; method" Url="html/9e8d862e-a392-2b13-547a-8d6fa925fa1b.htm" />
+  <HelpKINode Title="IsEmpty(Of A) method" Url="html/78d4513d-12cd-5de6-0c3f-9597640bc894.htm" />
+  <HelpKINode Title="IsEmpty&lt;A&gt; method" Url="html/78d4513d-12cd-5de6-0c3f-9597640bc894.htm" />
+  <HelpKINode Title="LastIndexOf method" Url="html/8248ee45-6767-0e6e-9bc0-38c0ed26ae2f.htm" />
+  <HelpKINode Title="LastIndexOfSlice method" Url="html/057adb43-78f2-f68d-6c64-98da16dbf9e3.htm" />
+  <HelpKINode Title="LastIndexWhere method" Url="html/d90264ad-b217-8df2-57cf-c43f7f930a23.htm" />
+  <HelpKINode Title="Map(Of A, B) method" Url="html/e5187f8d-8111-80d7-8ea6-d51ff0f572f9.htm" />
+  <HelpKINode Title="Map&lt;A, B&gt; method" Url="html/e5187f8d-8111-80d7-8ea6-d51ff0f572f9.htm" />
+  <HelpKINode Title="MkString method" Url="html/cb0d63ac-8d71-5f8c-0b38-a5ed1aea1891.htm" />
+  <HelpKINode Title="Patch(Of A) method" Url="html/424122ed-99c6-3d40-eefd-0ec6e82a5aff.htm" />
+  <HelpKINode Title="Patch&lt;A&gt; method" Url="html/424122ed-99c6-3d40-eefd-0ec6e82a5aff.htm" />
+  <HelpKINode Title="ReduceLeft(Of A, B) method" Url="html/ef2875be-d737-1e50-cf63-7b2865d6f1cc.htm" />
+  <HelpKINode Title="ReduceLeft&lt;A, B&gt; method" Url="html/ef2875be-d737-1e50-cf63-7b2865d6f1cc.htm" />
+  <HelpKINode Title="ReduceRight(Of A, B) method" Url="html/97c9068d-1d9d-a201-b2c0-cba80458de14.htm" />
+  <HelpKINode Title="ReduceRight&lt;A, B&gt; method" Url="html/97c9068d-1d9d-a201-b2c0-cba80458de14.htm" />
+  <HelpKINode Title="Slice(Of A) method" Url="html/627199ff-5d9d-0bd0-e99c-c64f96103442.htm" />
+  <HelpKINode Title="Slice&lt;A&gt; method" Url="html/627199ff-5d9d-0bd0-e99c-c64f96103442.htm" />
+  <HelpKINode Title="SplitAt(Of A) method" Url="html/6e5ff332-e38d-47c2-021a-9d1e14df413d.htm" />
+  <HelpKINode Title="SplitAt&lt;A&gt; method" Url="html/6e5ff332-e38d-47c2-021a-9d1e14df413d.htm" />
+  <HelpKINode Title="StartsWith method" Url="html/57c76989-171e-f9a1-8b5a-e4976f6061b7.htm" />
+</HelpKI>
