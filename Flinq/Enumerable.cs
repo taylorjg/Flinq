@@ -258,7 +258,7 @@ namespace Flinq
         /// </summary>
         /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements.</param>
-        /// <returns><code>true</code> if the sequence contain no elements, <code>false</code> otherwise.</returns>
+        /// <returns><c>true</c> if the sequence contain no elements, <c>false</c> otherwise.</returns>
         public static bool IsEmpty<A>(this IEnumerable<A> source)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -271,7 +271,7 @@ namespace Flinq
         /// </summary>
         /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
-        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence follow each other without any separator string.</returns>
+        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <c>ToString</c>) of all elements of this sequence follow each other without any separator string.</returns>
         public static string MkString<A>(this IEnumerable<A> source)
         {
             return source.MkString(string.Empty, string.Empty, string.Empty);
@@ -283,7 +283,7 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements of source.</typeparam>
         /// <param name="source">The sequence of elements to display.</param>
         /// <param name="sep">The separator string.</param>
-        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
+        /// <returns>A string representation of this sequence. In the resulting string the string representations (w.r.t. the method <c>ToString</c>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
         public static string MkString<A>(this IEnumerable<A> source, string sep)
         {
             return source.MkString(string.Empty, sep, string.Empty);
@@ -297,7 +297,7 @@ namespace Flinq
         /// <param name="start">The starting string.</param>
         /// <param name="sep">The separator string.</param>
         /// <param name="end">The ending string.</param>
-        /// <returns>A string representation of this sequence. The resulting string begins with the string <paramref name="start" /> and ends with the string <paramref name="end" />. Inside, the string representations (w.r.t. the method <code>ToString</code>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
+        /// <returns>A string representation of this sequence. The resulting string begins with the string <paramref name="start" /> and ends with the string <paramref name="end" />. Inside, the string representations (w.r.t. the method <c>ToString</c>) of all elements of this sequence are separated by the string <paramref name="sep" />.</returns>
         public static string MkString<A>(this IEnumerable<A> source, string start, string sep, string end)
         {
             if (source == null) throw Error.ArgumentNull("source");
@@ -312,8 +312,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
-        internal static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        /// <returns><c>true</c> if this collection has <paramref name="that" /> as a prefix, <c>false</c> otherwise.</returns>
+        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.StartsWith(that, null);
         }
@@ -324,9 +324,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
-        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a prefix, <code>false</code> otherwise.</returns>
-        internal static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
+        /// <returns><c>true</c> if this collection has <paramref name="that" /> as a prefix, <c>false</c> otherwise.</returns>
+        public static bool StartsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -352,8 +355,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
-        internal static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        /// <returns><c>true</c> if this collection has <paramref name="that" /> as a suffix, <c>false</c> otherwise.</returns>
+        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.EndsWith(that, null);
         }
@@ -364,9 +367,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
-        /// <returns><code>true</code> if this collection has <paramref name="that" /> as a suffix, <code>false</code> otherwise.</returns>
-        internal static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
+        /// <returns><c>true</c> if this collection has <paramref name="that" /> as a suffix, <c>false</c> otherwise.</returns>
+        public static bool EndsWith<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -380,8 +386,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element to test.</param>
-        /// <returns><code>true</code> if this list has an element that is equal (as determined by the default comparer) to <paramref name="elem" />, <code>false</code> otherwise.</returns>
-        internal static bool Contains<A>(this IEnumerable<A> source, A elem)
+        /// <returns><c>true</c> if this list has an element that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, <c>false</c> otherwise.</returns>
+        public static bool Contains<A>(this IEnumerable<A> source, A elem)
         {
             return source.Contains(elem, null);
         }
@@ -392,9 +398,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
-        /// <returns><code>true</code> if this list has an element that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, <code>false</code> otherwise.</returns>
-        internal static bool Contains<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
+        /// <returns><c>true</c> if this list has an element that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, <c>false</c> otherwise.</returns>
+        public static bool Contains<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (comparer == null) comparer = EqualityComparer<A>.Default;
@@ -408,8 +417,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
-        internal static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        /// <returns><c>true</c> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <c>false</c>.</returns>
+        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.ContainsSlice(that, null);
         }
@@ -420,9 +429,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
-        /// <returns><code>true</code> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <code>false</code>.</returns>
-        internal static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
+        /// <returns><c>true</c> if this list contains a slice with the same elements as <paramref name="that" />, otherwise <c>false</c>.</returns>
+        public static bool ContainsSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -437,7 +449,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="p">The predicate used to test elements.</param>
         /// <returns>The index of the first element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
-        internal static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
+        public static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
         {
             return source.IndexWhere(p, 0);
         }
@@ -450,7 +462,7 @@ namespace Flinq
         /// <param name="p">The predicate used to test elements.</param>
         /// <param name="from">The start index.</param>
         /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
-        internal static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int from)
+        public static int IndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int from)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (p == null) throw Error.ArgumentNull("p");
@@ -480,7 +492,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="p">The predicate used to test elements.</param>
         /// <returns>The index of the last element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
-        internal static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
+        public static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return source.LastIndexWhere(p, source.Count());
@@ -495,7 +507,7 @@ namespace Flinq
         /// <param name="p">The predicate used to test elements.</param>
         /// <param name="end">The end index.</param>
         /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that satisfies the predicate p, or -1, if none exists.</returns>
-        internal static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int end)
+        public static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int end)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -521,8 +533,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
-        /// <returns>The index of the first element of this list that is equal (as determined by the default comparer) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int IndexOf<A>(this IEnumerable<A> source, A elem)
+        /// <returns>The index of the first element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
+        public static int IndexOf<A>(this IEnumerable<A> source, A elem)
         {
             return source.IndexOf(elem, 0, null);
         }
@@ -533,9 +545,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The index of the first element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int IndexOf<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
+        public static int IndexOf<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
         {
             return source.IndexOf(elem, 0, comparer);
         }
@@ -547,8 +562,8 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
         /// <param name="from">The start index.</param>
-        /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that is equal (as determined by the default comparer) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int IndexOf<A>(this IEnumerable<A> source, A elem, int from)
+        /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
+        public static int IndexOf<A>(this IEnumerable<A> source, A elem, int from)
         {
             return source.IndexOf(elem, from, null);
         }
@@ -560,9 +575,12 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
         /// <param name="from">The start index.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The index &gt;= <paramref name="from" /> of the first element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int IndexOf<A>(this IEnumerable<A> source, A elem, int from, IEqualityComparer<A> comparer)
+        public static int IndexOf<A>(this IEnumerable<A> source, A elem, int from, IEqualityComparer<A> comparer)
         {
             if (comparer == null) comparer = EqualityComparer<A>.Default;
 
@@ -575,8 +593,8 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
-        /// <returns>The index of the last element of this list that is equal (as determined by the default comparer) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int LastIndexOf<A>(this IEnumerable<A> source, A elem)
+        /// <returns>The index of the last element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
+        public static int LastIndexOf<A>(this IEnumerable<A> source, A elem)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return source.LastIndexOf(elem, source.Count(), null);
@@ -589,9 +607,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The index of the last element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int LastIndexOf<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
+        public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return source.LastIndexOf(elem, source.Count(), comparer);
@@ -605,8 +626,8 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
         /// <param name="end">The end index.</param>
-        /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that is equal (as determined by the default comparer) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end)
+        /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
+        public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end)
         {
             return source.LastIndexOf(elem, end, null);
         }
@@ -618,9 +639,12 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="elem">The element value to search for.</param>
         /// <param name="end">The end index.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
-        internal static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end, IEqualityComparer<A> comparer)
+        public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
 
@@ -647,7 +671,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             return source.IndexOfSlice(that, 0, null);
         }
@@ -658,9 +682,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The first index such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             return source.IndexOfSlice(that, 0, comparer);
         }
@@ -673,7 +700,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="from">The start index.</param>
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from)
+        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from)
         {
             return source.IndexOfSlice(that, from, null);
         }
@@ -685,9 +712,12 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <param name="from">The start index.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
+        public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -717,7 +747,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <returns>The last index such that the elements of this list starting a this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
+        public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return source.LastIndexOfSlice(that, source.Count(), null);
@@ -730,9 +760,12 @@ namespace Flinq
         /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The last index such that the elements of this list starting a this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
+        public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, IEqualityComparer<A> comparer)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return source.LastIndexOfSlice(that, source.Count(), comparer);
@@ -747,7 +780,7 @@ namespace Flinq
         /// <param name="that">The sequence to test.</param>
         /// <param name="end">The end index.</param>
         /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end)
+        public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end)
         {
             return source.LastIndexOfSlice(that, end, null);
         }
@@ -759,9 +792,12 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="that">The sequence to test.</param>
         /// <param name="end">The end index.</param>
-        /// <param name="comparer">An <code>IEqualityComparer&lt;A&gt;</code> to use to compare elements.</param>
+        /// <param name="comparer">
+        /// An <c>IEqualityComparer&lt;A&gt;</c> to use to compare elements.
+        /// If <paramref name="comparer" /> is <c>null</c>, the default equality comparer, <c>EqualityComparer&lt;A&gt;.Default</c>, is used to compare elements.
+        /// </param>
         /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
-        internal static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
+        public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
@@ -792,7 +828,7 @@ namespace Flinq
         /// <param name="source">The input sequence.</param>
         /// <param name="n">The position at which to split.</param>
         /// <returns>A pair of lists consisting of the first <paramref name="n" /> elements of this list, and the other elements.</returns>
-        internal static Tuple<IEnumerable<A>, IEnumerable<A>> SplitAt<A>(this IEnumerable<A> source, int n)
+        public static Tuple<IEnumerable<A>, IEnumerable<A>> SplitAt<A>(this IEnumerable<A> source, int n)
         {
             if (source == null) throw Error.ArgumentNull("source");
 

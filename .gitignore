@@ -124,6 +124,8 @@ DocProject/Help/html
 # Click-Once directory
 publish/
 
+Help/
+
 # Publish Web Output
 *.Publish.xml
 *.pubxml
