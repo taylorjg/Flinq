@@ -73,6 +73,7 @@
     <Compile Include="SampleDomainClasses\Employee.cs" />
     <Compile Include="SampleDomainClasses\EmployeeDeskSizeComparer.cs" />
     <Compile Include="SliceTests.cs" />
+    <Compile Include="SplitAtTests.cs" />
     <Compile Include="StartsWithTests.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

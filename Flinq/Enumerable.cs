@@ -785,6 +785,22 @@ namespace Flinq
             // ReSharper restore PossibleMultipleEnumeration
         }
 
+        /// <summary>
+        /// Splits this list into two at a given position.
+        /// </summary>
+        /// <typeparam name="A">The type of the elements in the input sequence.</typeparam>
+        /// <param name="source">The input sequence.</param>
+        /// <param name="n">The position at which to split.</param>
+        /// <returns>A pair of lists consisting of the first <paramref name="n" /> elements of this list, and the other elements.</returns>
+        internal static Tuple<IEnumerable<A>, IEnumerable<A>> SplitAt<A>(this IEnumerable<A> source, int n)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+
+            // ReSharper disable PossibleMultipleEnumeration
+            return Tuple.Create(source.Take(n), source.Skip(n));
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
         private static IEnumerable<A> Tail<A>(this IEnumerable<A> source)
         {
             return source.Skip(1);
