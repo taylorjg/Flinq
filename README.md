@@ -9,11 +9,11 @@ A lame conflation of "functional programming" and "LINQ".
 
 ## Documentation
 
-Documentation is available at the following GitHub Pages location: http://taylorjg.github.io/Flinq/. The documentation was generated from XML documentation comments using [Sandcastle Help File Builder](http://shfb.codeplex.com/ "Sandcastle Help File Builder")
+Documentation is available at the following GitHub Pages location: http://taylorjg.github.io/Flinq/. The documentation was generated from XML documentation comments using [Sandcastle Help File Builder](http://shfb.codeplex.com/ "Sandcastle Help File Builder").
 
 ## NuGet
 
-Flinq is available as a NuGet package - see http://www.nuget.org/packages/Flinq/
+Flinq is available as a NuGet package - see http://www.nuget.org/packages/Flinq/.
 
 ## Releases
 
