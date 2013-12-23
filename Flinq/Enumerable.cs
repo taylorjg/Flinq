@@ -592,9 +592,7 @@ namespace Flinq
         /// <returns>The index of the last element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
         public static int LastIndexOf<A>(this IEnumerable<A> source, A elem)
         {
-            // ReSharper disable PossibleMultipleEnumeration
-            return source.LastIndexOf(elem, source.Count(), null);
-            // ReSharper restore PossibleMultipleEnumeration
+            return source.LastIndexOfHelper(elem, null, null);
         }
 
         /// <summary>
@@ -610,9 +608,7 @@ namespace Flinq
         /// <returns>The index of the last element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
         public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, IEqualityComparer<A> comparer)
         {
-            // ReSharper disable PossibleMultipleEnumeration
-            return source.LastIndexOf(elem, source.Count(), comparer);
-            // ReSharper restore PossibleMultipleEnumeration
+            return source.LastIndexOfHelper(elem, null, comparer);
         }
 
         /// <summary>
@@ -625,7 +621,7 @@ namespace Flinq
         /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that is equal (as determined by <c>EqualityComparer&lt;A&gt;.Default</c>) to <paramref name="elem" />, or -1, if none exists.</returns>
         public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end)
         {
-            return source.LastIndexOf(elem, end, null);
+            return source.LastIndexOfHelper(elem, end, null);
         }
 
         /// <summary>
@@ -642,22 +638,20 @@ namespace Flinq
         /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that is equal (as determined by <paramref name="comparer" />) to <paramref name="elem" />, or -1, if none exists.</returns>
         public static int LastIndexOf<A>(this IEnumerable<A> source, A elem, int end, IEqualityComparer<A> comparer)
         {
+            return source.LastIndexOfHelper(elem, end, comparer);
+        }
+
+        private static int LastIndexOfHelper<A>(this IEnumerable<A> source, A elem, int? end, IEqualityComparer<A> comparer)
+        {
             if (source == null) throw Error.ArgumentNull("source");
+            if (comparer == null) comparer = EqualityComparer<A>.Default;
 
-            // ReSharper disable PossibleMultipleEnumeration
-            var sourceLength = source.Count();
+            var buffer = (end.HasValue) ? new Buffer<A>(source, end.Value) : new Buffer<A>(source);
 
-            var skipAmount = Math.Max(sourceLength - end - 1, 0);
-            var reversedSource = source.Reverse().Skip(skipAmount);
-            var result = reversedSource.IndexOf(elem, comparer);
+            for (var i = buffer.Count - 1; i >= 0; i--)
+                if (comparer.Equals(buffer.Items[i], elem)) return i;
 
-            if (result >= 0)
-            {
-                result = sourceLength - result - skipAmount - 1;
-            }
-
-            return result;
-            // ReSharper restore PossibleMultipleEnumeration
+            return -1;
         }
 
         /// <summary>
