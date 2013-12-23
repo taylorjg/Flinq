@@ -494,9 +494,15 @@ namespace Flinq
         /// <returns>The index of the last element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
         public static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
         {
-            // ReSharper disable PossibleMultipleEnumeration
-            return source.LastIndexWhere(p, source.Count());
-            // ReSharper restore PossibleMultipleEnumeration
+            if (source == null) throw Error.ArgumentNull("source");
+            if (p == null) throw Error.ArgumentNull("p");
+
+            var buffer = new Buffer<A>(source);
+
+            for (var i = buffer.Count - 1; i >= 0; i--)
+                if (p(buffer.Items[i])) return i;
+
+            return -1;
         }
 
         /// <summary>

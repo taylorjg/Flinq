@@ -58,6 +58,14 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(expected));
         }
 
+        [Test]
+        public void LastIndexWhereGivenEmptySourceSequenceWorks()
+        {
+            var source = Utils.EmptySequence<int>();
+            var actual = source.LastIndexWhere(_ => true);
+            Assert.That(actual, Is.EqualTo(-1));
+        }
+
         [TestCase(1, 9, 8)]
         [TestCase(2, 100, 8)]
         [TestCase(3, 4, 3)]

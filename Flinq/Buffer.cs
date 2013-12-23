@@ -44,14 +44,5 @@ namespace Flinq
             Items = items;
             Count = count;
         }
-
-        //internal TElement[] ToArray()
-        //{
-        //    if (Count == 0) return new TElement[0];
-        //    if (Items.Length == Count) return Items;
-        //    var result = new TElement[Count];
-        //    Array.Copy(Items, 0, result, 0, Count);
-        //    return result;
-        //}
     }
 }
