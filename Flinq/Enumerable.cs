@@ -494,15 +494,7 @@ namespace Flinq
         /// <returns>The index of the last element of this list that satisfies the predicate <paramref name="p" />, or -1, if none exists.</returns>
         public static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p)
         {
-            if (source == null) throw Error.ArgumentNull("source");
-            if (p == null) throw Error.ArgumentNull("p");
-
-            var buffer = new Buffer<A>(source);
-
-            for (var i = buffer.Count - 1; i >= 0; i--)
-                if (p(buffer.Items[i])) return i;
-
-            return -1;
+            return source.LastIndexWhereHelper(p, null);
         }
 
         /// <summary>
@@ -515,22 +507,20 @@ namespace Flinq
         /// <returns>The index &lt;= <paramref name="end" /> of the last element of this list that satisfies the predicate p, or -1, if none exists.</returns>
         public static int LastIndexWhere<A>(this IEnumerable<A> source, Func<A, bool> p, int end)
         {
+            return source.LastIndexWhereHelper(p, end);
+        }
+
+        private static int LastIndexWhereHelper<A>(this IEnumerable<A> source, Func<A, bool> p, int? end)
+        {
             if (source == null) throw Error.ArgumentNull("source");
+            if (p == null) throw Error.ArgumentNull("p");
 
-            // ReSharper disable PossibleMultipleEnumeration
-            var sourceLength = source.Count();
+            var buffer = (end.HasValue) ? new Buffer<A>(source, end.Value) : new Buffer<A>(source);
 
-            var skipAmount = Math.Max(sourceLength - end - 1, 0);
-            var reversedSource = source.Reverse().Skip(skipAmount);
-            var result = reversedSource.IndexWhere(p);
+            for (var i = buffer.Count - 1; i >= 0; i--)
+                if (p(buffer.Items[i])) return i;
 
-            if (result >= 0)
-            {
-                result = sourceLength - result - skipAmount - 1;
-            }
-
-            return result;
-            // ReSharper restore PossibleMultipleEnumeration
+            return -1;
         }
 
         /// <summary>
