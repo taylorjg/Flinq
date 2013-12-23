@@ -47,3 +47,13 @@ The following sections indicate which methods are supported and in which release
 * IndexOfSlice
 * LastIndexOfSlice
 * SplitAt
+
+## TODO
+
+Improve the efficiency of the following methods:
+
+* ContainsSlice
+* IndexOfSlice
+* LastIndexOfSlice
+
+by implementing the [Knuth–Morris–Pratt algorithm](http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm "Knuth–Morris–Pratt algorithm") as the Scala implementation does (see the kmpSearch method in https://github.com/scala/scala/blob/master/src/library/scala/collection/SeqLike.scala).
