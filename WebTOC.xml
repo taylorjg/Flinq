@@ -1,67 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="6d08665d-3939-447e-b70e-39d81563f9cf" Title="Flinq Namespace" Url="html/db679257-2674-7250-73bf-0ff8fe2905bf.htm">
-    <HelpTOCNode Id="6b408eec-46cf-48fe-a65c-8a3f3671a015" Title="Enumerable Class" Url="html/88f4bf92-cbd3-a9b4-8fde-cb5539f66ce0.htm">
+  <HelpTOCNode Id="12df5232-72ac-46bf-a3a3-a276fcdec72f" Title="Flinq Namespace" Url="html/db679257-2674-7250-73bf-0ff8fe2905bf.htm">
+    <HelpTOCNode Id="194905ff-25b3-4b91-aa6e-c73dc847c551" Title="Enumerable Class" Url="html/88f4bf92-cbd3-a9b4-8fde-cb5539f66ce0.htm">
       <HelpTOCNode Title="Enumerable Members" Url="html/f98642e1-47bc-f33a-4c88-f7bf969042e2.htm" />
-      <HelpTOCNode Id="12043cc8-4102-48b2-9133-7a81612d054a" Title="Enumerable Methods" Url="html/52722be6-4449-28e8-32bc-53e055e9f141.htm">
-        <HelpTOCNode Id="3187da99-10be-4923-afa4-f6b7c9164b6d" Title="Contains Method " Url="html/d256e925-40ed-8d3d-cd98-ddf509c4e8b9.htm">
+      <HelpTOCNode Id="608aeb11-a45d-44db-8949-8dcb62e50495" Title="Enumerable Methods" Url="html/52722be6-4449-28e8-32bc-53e055e9f141.htm">
+        <HelpTOCNode Id="6015a2c8-65d8-4b26-b575-c55cf4601d52" Title="Contains Method " Url="html/d256e925-40ed-8d3d-cd98-ddf509c4e8b9.htm">
           <HelpTOCNode Title="Contains(A) Method (IEnumerable(A), A)" Url="html/ec5c79bb-b9ba-661e-3c2a-b3fda3d0fde8.htm" />
           <HelpTOCNode Title="Contains(A) Method (IEnumerable(A), A, IEqualityComparer(A))" Url="html/76ec188f-4139-a22a-3bcb-8c0191ccd6f9.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="fd43d906-8ae2-4ca9-a746-4bd67b10c11a" Title="ContainsSlice Method " Url="html/404a8957-d784-de04-a750-809aaa0e91d6.htm">
+        <HelpTOCNode Id="56baca0d-f3ae-4206-9691-0a496345d378" Title="ContainsSlice Method " Url="html/404a8957-d784-de04-a750-809aaa0e91d6.htm">
           <HelpTOCNode Title="ContainsSlice(A) Method (IEnumerable(A), IEnumerable(A))" Url="html/440d7cb6-f422-0553-4ae1-bfb3cb39a341.htm" />
           <HelpTOCNode Title="ContainsSlice(A) Method (IEnumerable(A), IEnumerable(A), IEqualityComparer(A))" Url="html/02a7f53f-c799-e0f0-a61e-86f5ce711b37.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="a12843c8-4702-4a17-8f44-c243881ad2e1" Title="EndsWith Method " Url="html/935ac398-78f6-6018-fff1-f4fa2303bf67.htm">
+        <HelpTOCNode Id="31fc5ee5-0565-4061-9a12-b47e9b03bdba" Title="EndsWith Method " Url="html/935ac398-78f6-6018-fff1-f4fa2303bf67.htm">
           <HelpTOCNode Title="EndsWith(A) Method (IEnumerable(A), IEnumerable(A))" Url="html/d5fe684d-a6c5-0ef7-7134-d07d8b4dcba2.htm" />
           <HelpTOCNode Title="EndsWith(A) Method (IEnumerable(A), IEnumerable(A), IEqualityComparer(A))" Url="html/35d0db48-a054-7074-e50f-89ffe9e5aa68.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="FlatMap(A, B) Method " Url="html/b76b8cdc-b308-968f-4d03-37fb153d5a86.htm" />
         <HelpTOCNode Title="FoldLeft(A, B) Method " Url="html/834ef470-6873-f43e-74e1-993e066fff28.htm" />
         <HelpTOCNode Title="FoldRight(A, B) Method " Url="html/13215dae-b016-1b8c-f2ad-4c335bbcce53.htm" />
-        <HelpTOCNode Id="13100101-26be-47ac-a433-9a7ce7c49972" Title="ForEach Method " Url="html/886d233b-3f4f-fe18-b689-fbf43b133daf.htm">
+        <HelpTOCNode Id="0c978348-8808-431e-b6d2-e714e058f468" Title="ForEach Method " Url="html/886d233b-3f4f-fe18-b689-fbf43b133daf.htm">
           <HelpTOCNode Title="ForEach(A) Method (IEnumerable(A), Action(A))" Url="html/fcb76f0e-36ac-c9f2-fbab-348afa1004fe.htm" />
           <HelpTOCNode Title="ForEach(A) Method (IEnumerable(A), Action(A, Int32))" Url="html/305bab5c-0994-46bd-c9af-cc3c0998392c.htm" />
           <HelpTOCNode Title="ForEach(A) Method (IEnumerable(A), Action(A, Int64))" Url="html/2caea60f-f133-a786-df92-c77dc7f1cd24.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="7572f361-c362-4dce-a12e-88540ed72e91" Title="IndexOf Method " Url="html/a43b12e5-4412-3ba7-1fb7-9360d68b8b87.htm">
+        <HelpTOCNode Id="e634eb19-8272-41d0-afc8-9b3a66d074df" Title="IndexOf Method " Url="html/a43b12e5-4412-3ba7-1fb7-9360d68b8b87.htm">
           <HelpTOCNode Title="IndexOf(A) Method (IEnumerable(A), A)" Url="html/bd1d9d9a-99b2-ecac-1b7d-eff302bcfe23.htm" />
           <HelpTOCNode Title="IndexOf(A) Method (IEnumerable(A), A, IEqualityComparer(A))" Url="html/b3df042c-1628-6686-bdb5-3406fb15c142.htm" />
           <HelpTOCNode Title="IndexOf(A) Method (IEnumerable(A), A, Int32)" Url="html/2380460c-f43f-885e-ebce-5bb41933af90.htm" />
           <HelpTOCNode Title="IndexOf(A) Method (IEnumerable(A), A, Int32, IEqualityComparer(A))" Url="html/5b70a6ad-e1fc-b197-d8b8-0eed2a6f04be.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="96420e89-d66a-46e5-bedf-091fcefd45c2" Title="IndexOfSlice Method " Url="html/03091acc-3bb8-d8eb-3b1d-7301c633e350.htm">
+        <HelpTOCNode Id="7ad9a132-934d-4c85-96d9-afba7d1572a1" Title="IndexOfSlice Method " Url="html/03091acc-3bb8-d8eb-3b1d-7301c633e350.htm">
           <HelpTOCNode Title="IndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A))" Url="html/6ebb2e6e-cb50-82f9-76bd-f1d88a55a2be.htm" />
           <HelpTOCNode Title="IndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), IEqualityComparer(A))" Url="html/40a78ddf-136e-e3bd-e956-ccc4b3ff4ea0.htm" />
           <HelpTOCNode Title="IndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), Int32)" Url="html/0f2228ec-5fdd-c1e9-1b9a-3b62f01b599f.htm" />
           <HelpTOCNode Title="IndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), Int32, IEqualityComparer(A))" Url="html/41497e9c-7f8d-ee4e-e19a-9f78e01040be.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="64c77b43-9e57-462b-9648-ed64c4dca8cb" Title="IndexWhere Method " Url="html/be5a10f7-0d57-f1bc-4697-dc78206f9201.htm">
+        <HelpTOCNode Id="197a1570-e767-4f0b-bf5b-0b89a9630457" Title="IndexWhere Method " Url="html/be5a10f7-0d57-f1bc-4697-dc78206f9201.htm">
           <HelpTOCNode Title="IndexWhere(A) Method (IEnumerable(A), Func(A, Boolean))" Url="html/07872b68-a9b8-2431-26cb-7efa4ac78889.htm" />
           <HelpTOCNode Title="IndexWhere(A) Method (IEnumerable(A), Func(A, Boolean), Int32)" Url="html/a30503e2-daab-0a9a-8469-587ccc688707.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Indices(A) Method " Url="html/f44e683a-0dbd-ec29-ec44-6be9b57e860e.htm" />
         <HelpTOCNode Title="IndicesLong(A) Method " Url="html/9e8d862e-a392-2b13-547a-8d6fa925fa1b.htm" />
         <HelpTOCNode Title="IsEmpty(A) Method " Url="html/78d4513d-12cd-5de6-0c3f-9597640bc894.htm" />
-        <HelpTOCNode Id="d1751298-e331-4fa4-a82e-e387506a7460" Title="LastIndexOf Method " Url="html/8248ee45-6767-0e6e-9bc0-38c0ed26ae2f.htm">
+        <HelpTOCNode Id="40d50bd8-0008-4f8d-a601-d7706df001eb" Title="LastIndexOf Method " Url="html/8248ee45-6767-0e6e-9bc0-38c0ed26ae2f.htm">
           <HelpTOCNode Title="LastIndexOf(A) Method (IEnumerable(A), A)" Url="html/9fc0d610-4561-ec95-1728-4d020e7ffba1.htm" />
           <HelpTOCNode Title="LastIndexOf(A) Method (IEnumerable(A), A, IEqualityComparer(A))" Url="html/da815fee-2755-459f-3ac4-103ee39b78db.htm" />
           <HelpTOCNode Title="LastIndexOf(A) Method (IEnumerable(A), A, Int32)" Url="html/d60503c0-9f5d-2b73-16d9-9dbadd1a8d74.htm" />
           <HelpTOCNode Title="LastIndexOf(A) Method (IEnumerable(A), A, Int32, IEqualityComparer(A))" Url="html/2e2d2839-8b3d-9a84-7a25-fac11136c4ae.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="8f025c6f-813c-4db5-8d99-f03ace1c347f" Title="LastIndexOfSlice Method " Url="html/057adb43-78f2-f68d-6c64-98da16dbf9e3.htm">
+        <HelpTOCNode Id="dc515389-22c0-429d-8e79-ac183ea6cc67" Title="LastIndexOfSlice Method " Url="html/057adb43-78f2-f68d-6c64-98da16dbf9e3.htm">
           <HelpTOCNode Title="LastIndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A))" Url="html/ed4e4cd9-1735-a008-5b47-33b078293c1e.htm" />
           <HelpTOCNode Title="LastIndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), IEqualityComparer(A))" Url="html/617ba91e-54e6-e2c0-2b43-8b337ae549bf.htm" />
           <HelpTOCNode Title="LastIndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), Int32)" Url="html/01252e83-dbd5-1cb9-ce7a-36b8f648b80c.htm" />
           <HelpTOCNode Title="LastIndexOfSlice(A) Method (IEnumerable(A), IEnumerable(A), Int32, IEqualityComparer(A))" Url="html/f184d4ba-9314-0cb1-6d3a-1991fec87882.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="8b120ffa-d61b-4838-9f75-ea8a413d2a67" Title="LastIndexWhere Method " Url="html/d90264ad-b217-8df2-57cf-c43f7f930a23.htm">
+        <HelpTOCNode Id="bbace6de-00f1-4fb7-a82d-16254e18fd81" Title="LastIndexWhere Method " Url="html/d90264ad-b217-8df2-57cf-c43f7f930a23.htm">
           <HelpTOCNode Title="LastIndexWhere(A) Method (IEnumerable(A), Func(A, Boolean))" Url="html/fe92dcb4-dd13-0364-998b-e4acf21ecbe9.htm" />
           <HelpTOCNode Title="LastIndexWhere(A) Method (IEnumerable(A), Func(A, Boolean), Int32)" Url="html/841f5259-4cbe-a119-6046-9003c07a8ae8.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Map(A, B) Method " Url="html/e5187f8d-8111-80d7-8ea6-d51ff0f572f9.htm" />
-        <HelpTOCNode Id="0beaf84b-0bd4-4eca-a96e-6dd2eeed6bb4" Title="MkString Method " Url="html/cb0d63ac-8d71-5f8c-0b38-a5ed1aea1891.htm">
+        <HelpTOCNode Id="344b4646-5be2-448f-a40d-b77e2d4b301f" Title="MkString Method " Url="html/cb0d63ac-8d71-5f8c-0b38-a5ed1aea1891.htm">
           <HelpTOCNode Title="MkString(A) Method (IEnumerable(A))" Url="html/89a1e1ae-75ca-b544-ecf4-b569755f56b0.htm" />
           <HelpTOCNode Title="MkString(A) Method (IEnumerable(A), String)" Url="html/7a58d7ae-cfb1-874c-3ff8-74c8b2d0ff6c.htm" />
           <HelpTOCNode Title="MkString(A) Method (IEnumerable(A), String, String, String)" Url="html/4a67e002-39c1-a86e-804c-491dde921af6.htm" />
@@ -71,7 +71,7 @@
         <HelpTOCNode Title="ReduceRight(A, B) Method " Url="html/97c9068d-1d9d-a201-b2c0-cba80458de14.htm" />
         <HelpTOCNode Title="Slice(A) Method " Url="html/627199ff-5d9d-0bd0-e99c-c64f96103442.htm" />
         <HelpTOCNode Title="SplitAt(A) Method " Url="html/6e5ff332-e38d-47c2-021a-9d1e14df413d.htm" />
-        <HelpTOCNode Id="cc0cc33b-9874-445d-8f1c-2c508a71a204" Title="StartsWith Method " Url="html/57c76989-171e-f9a1-8b5a-e4976f6061b7.htm">
+        <HelpTOCNode Id="1fb49b2a-99d6-4345-816b-971624cb61b0" Title="StartsWith Method " Url="html/57c76989-171e-f9a1-8b5a-e4976f6061b7.htm">
           <HelpTOCNode Title="StartsWith(A) Method (IEnumerable(A), IEnumerable(A))" Url="html/95329621-824e-240b-30c7-7b4a5ec7cda6.htm" />
           <HelpTOCNode Title="StartsWith(A) Method (IEnumerable(A), IEnumerable(A), IEqualityComparer(A))" Url="html/93c057d8-fd86-ea2e-e63b-adf3c7385d60.htm" />
         </HelpTOCNode>
