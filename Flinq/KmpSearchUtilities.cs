@@ -10,17 +10,113 @@ namespace Flinq
 
     internal static class KmpSearchUtilities
     {
-        //internal static int KmpSearch<B>(
-        //    IEnumerable<B> s,
-        //    int m0,
-        //    int m1,
-        //    IEnumerable<B> w,
-        //    int n0,
-        //    int n1,
-        //    bool forward)
-        //{
-        //    return -1;
-        //}
+        internal static int KmpSearch<B>(
+            IEnumerable<B> s,
+            int m0,
+            int m1,
+            IEnumerable<B> w,
+            int n0,
+            int n1,
+            bool forward)
+        {
+            var comparer = EqualityComparer<B>.Default;
+
+            if (n1 == n0 + 1)
+            {
+                return forward
+                    ? ClipR(s.IndexOf(w.ElementAt(n0), m0), m1)
+                    : ClipL(s.LastIndexOf(w.ElementAt(n0), m1 - 1), m0 - 1);
+            }
+
+            if (m1 - m0 == n1 - n0)
+            {
+                if (s.Slice(m0, m1).SequenceEqual(w.Slice(n0, n1)))
+                    return m0;
+                return -1;
+            }
+
+            var list = s as IList<B>;
+            if (list != null)
+            {
+                var wOpt = KmpOptimisedWord(w, n0, n1, forward);
+                var jumpTable = KmpJumpTable(wOpt, n1 - n0);
+                var i = 0;
+                var m = 0;
+                var zero = (forward) ? m0 : m1 - 1;
+                var delta = (forward) ? 1 : -1;
+                while (i + m < m1 - m0)
+                {
+                    if (comparer.Equals(wOpt[i], list[zero + delta * (i + m)]))
+                    {
+                        i++;
+                        if (i == n1 - n0)
+                        {
+                            return (forward) ? m + m0 : m1 - m - i;
+                        }
+                    }
+                    else
+                    {
+                        var ti = jumpTable[i];
+                        m += i - ti;
+                        if (i > 0)
+                        {
+                            i = ti;
+                        }
+                    }
+                }
+                return -1;
+            }
+
+            var it = s.Skip(m0);
+            using (var e = it.GetEnumerator())
+            {
+                var wOpt = KmpOptimisedWord(w, n0, n1, forward: true);
+                var jumpTable = KmpJumpTable(wOpt, n1 - n0);
+                var cache = new B[n1 = n0];
+                var largest = 0;
+                var i = 0;
+                var m = 0;
+                var answer = -1;
+                while (m + m0 + n1 - n0 <= m1)
+                {
+                    while (i + m >= largest)
+                    {
+                        e.MoveNext();
+                        cache[largest % (n1 - n0)] = e.Current;
+                        largest++;
+                    }
+                    if (comparer.Equals(wOpt[i], cache[(i + m) % (n1 - n0)]))
+                    {
+                        i++;
+                        if (i == n1 - n0)
+                        {
+                            if (forward)
+                            {
+                                return m + m0;
+                            }
+                            i--;
+                            answer = m + m0;
+                            var ti = jumpTable[i];
+                            m += i - ti;
+                            if (i > 0)
+                            {
+                                i = ti;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var ti = jumpTable[i];
+                        m += i - ti;
+                        if (i > 0)
+                        {
+                            i = ti;
+                        }
+                    }
+                }
+                return answer;
+            }
+        }
 
         private interface IKmpOptimisedWord<out B>
         {
