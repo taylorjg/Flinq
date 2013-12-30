@@ -709,17 +709,52 @@ namespace Flinq
         /// <returns>The first index >= <paramref name="from" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
         {
+            return IndexOfSliceExperimental(source, that, from, comparer);
+
+            //if (source == null) throw Error.ArgumentNull("source");
+            //if (that == null) throw Error.ArgumentNull("that");
+
+            //// TODO: If source is indexable, then we could/should employ the Knuth–Morris–Pratt algorithm
+            //// http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+
+            //var clippedFrom = Math.Max(0, from);
+
+            //// ReSharper disable PossibleMultipleEnumeration
+            //var index = clippedFrom;
+            //var seq = source.Skip(clippedFrom);
+            //for (; ; )
+            //{
+            //    if (seq.IsEmpty()) return -1;
+            //    if (seq.StartsWith(that, comparer)) return index;
+            //    seq = seq.Tail();
+            //    index++;
+            //}
+            //// ReSharper restore PossibleMultipleEnumeration
+        }
+
+        private static int IndexOfSliceExperimental<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
+        {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
 
-            // TODO: If source is indexable, then we could/should employ the Knuth–Morris–Pratt algorithm
-            // http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+            var sourceList = source as IList<A>;
+            var thatList = that as IList<A>;
+
+            var clippedFrom = Math.Max(0, from);
+
+            if (sourceList != null && thatList != null)
+            {
+                var l = sourceList.Count;
+                var tl = thatList.Count;
+                if (from > l) return -1;
+                if (tl < 1) return clippedFrom;
+                if (l < tl) return -1;
+                return KmpSearchUtilities.KmpSearch(sourceList, clippedFrom, l, thatList, 0, tl, comparer, forward: true);
+            }
 
             // ReSharper disable PossibleMultipleEnumeration
-            if (that.IsEmpty()) return 0;
-
-            var index = from;
-            var seq = source.Skip(from);
+            var index = clippedFrom;
+            var seq = source.Skip(clippedFrom);
             for (; ; )
             {
                 if (seq.IsEmpty()) return -1;

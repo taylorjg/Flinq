@@ -17,9 +17,10 @@ namespace Flinq
             IEnumerable<B> w,
             int n0,
             int n1,
+            IEqualityComparer<B> comparer,
             bool forward)
         {
-            var comparer = EqualityComparer<B>.Default;
+            if (comparer == null) comparer = EqualityComparer<B>.Default;
 
             if (n1 == n0 + 1)
             {
@@ -39,7 +40,7 @@ namespace Flinq
             if (list != null)
             {
                 var wOpt = KmpOptimisedWord(w, n0, n1, forward);
-                var jumpTable = KmpJumpTable(wOpt, n1 - n0);
+                var jumpTable = KmpJumpTable(wOpt, n1 - n0, comparer);
                 var i = 0;
                 var m = 0;
                 var zero = (forward) ? m0 : m1 - 1;
@@ -71,7 +72,7 @@ namespace Flinq
             using (var e = it.GetEnumerator())
             {
                 var wOpt = KmpOptimisedWord(w, n0, n1, forward: true);
-                var jumpTable = KmpJumpTable(wOpt, n1 - n0);
+                var jumpTable = KmpJumpTable(wOpt, n1 - n0, comparer);
                 var cache = new B[n1 = n0];
                 var largest = 0;
                 var i = 0;
@@ -252,11 +253,8 @@ namespace Flinq
             return new KmpOptimisedWordV4<B>(w, n0, n1, forward);
         }
 
-        private static int[] KmpJumpTable<B>(IKmpOptimisedWord<B> wOpt, int wLen)
+        private static int[] KmpJumpTable<B>(IKmpOptimisedWord<B> wOpt, int wLen, IEqualityComparer<B> comparer)
         {
-            // TODO: pass 'comparer' as a parameter?
-            var comparer = EqualityComparer<B>.Default;
-
             var arr = new int[wLen];
             var pos = 2;
             var cnd = 0;

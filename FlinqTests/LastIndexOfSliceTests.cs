@@ -73,7 +73,7 @@ namespace FlinqTests
         [TestCase(9, new[] { 5, 5, 5 }, 10, -1)]
         [TestCase(10, new[] { 5, 5, 5 }, 0, -1)]
         [TestCase(11, new[] { 5, 5, 5 }, 5, -1)]
-        [TestCase(12, new[] { 3, 4, 5 }, -1, -1)]
+        [TestCase(12, new[] { 3, 4, 5 }, -100, -1)]
         public void LastIndexOfSpecifyingEndSliceWorks(int dummy, int[] that, int end, int expected)
         {
             var source = new[] { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
