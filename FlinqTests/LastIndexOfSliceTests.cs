@@ -63,18 +63,19 @@ namespace FlinqTests
         }
 
         [TestCase(1, new int[] { }, 10, 10)]
-        [TestCase(2, new int[] { }, 0, 10)]
-        [TestCase(3, new int[] { }, 5, 10)]
-        [TestCase(4, new[] { 3 }, 10, 7)]
-        [TestCase(5, new[] { 3 }, 6, 2)]
-        [TestCase(6, new[] { 3, 4, 5 }, 10, 7)]
-        [TestCase(7, new[] { 3, 4, 5 }, 0, -1)]
-        [TestCase(8, new[] { 3, 4, 5 }, 6, 2)]
-        [TestCase(9, new[] { 5, 5, 5 }, 10, -1)]
-        [TestCase(10, new[] { 5, 5, 5 }, 0, -1)]
-        [TestCase(11, new[] { 5, 5, 5 }, 5, -1)]
-        [TestCase(12, new[] { 3, 4, 5 }, -100, -1)]
-        public void LastIndexOfSpecifyingEndSliceWorks(int dummy, int[] that, int end, int expected)
+        [TestCase(2, new int[] { }, 0, 0)]
+        [TestCase(3, new int[] { }, 5, 5)]
+        [TestCase(4, new int[] { }, 100, 10)]
+        [TestCase(5, new[] { 3 }, 10, 7)]
+        [TestCase(6, new[] { 3 }, 6, 2)]
+        [TestCase(7, new[] { 3, 4, 5 }, 10, 7)]
+        [TestCase(8, new[] { 3, 4, 5 }, 0, -1)]
+        [TestCase(9, new[] { 3, 4, 5 }, 6, 2)]
+        [TestCase(10, new[] { 5, 5, 5 }, 10, -1)]
+        [TestCase(11, new[] { 5, 5, 5 }, 0, -1)]
+        [TestCase(12, new[] { 5, 5, 5 }, 5, -1)]
+        [TestCase(13, new[] { 3, 4, 5 }, -100, -1)]
+        public void LastIndexOfSliceSpecifyingEndWorks(int dummy, int[] that, int end, int expected)
         {
             var source = new[] { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
             var actual = source.LastIndexOfSlice(that, end);
@@ -82,13 +83,13 @@ namespace FlinqTests
         }
 
         [TestCase(1, "", 7, 7)]
-        [TestCase(2, "", 6, 7)]
+        [TestCase(2, "", 6, 6)]
         [TestCase(3, "M", 7, 6)]
         [TestCase(4, "LM", 7, 5)]
         [TestCase(5, "SL", 7, 4)]
         [TestCase(6, "SS", 7, -1)]
         [TestCase(7, "SL", 3, 2)]
-        [TestCase(7, "SL", 4, 2)]
+        [TestCase(8, "SL", 4, 4)]
         public void LastIndexOfSliceUsingAnExplicitComparerWorks(int dummy, string deskSizes, int end, int expected)
         {
             var source = EmployeeCollectionBuilder.Build("LMSLSLM");

@@ -736,6 +736,7 @@ namespace Flinq
         {
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
+            if (comparer == null) comparer = EqualityComparer<A>.Default;
 
             var sourceList = source as IList<A>;
             var thatList = that as IList<A>;
@@ -824,16 +825,23 @@ namespace Flinq
         /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
         {
+            //return LastIndexOfSliceExperimental(source, that, end, comparer);
+
             if (source == null) throw Error.ArgumentNull("source");
             if (that == null) throw Error.ArgumentNull("that");
+
+            if (end < 0) return -1;
 
             // ReSharper disable PossibleMultipleEnumeration
             var sourceLength = source.Count();
             var thatLength = that.Count();
 
-            if (thatLength == 0) return sourceLength;
+            var clippedEnd = Math.Min(sourceLength - thatLength, end);
+            if (thatLength == 0) return clippedEnd;
 
-            var skipAmount = Math.Max(sourceLength - end - 1, 0);
+            if (sourceLength < thatLength) return -1;
+
+            var skipAmount = sourceLength - thatLength - clippedEnd;
             var reversedSource = source.Reverse().Skip(skipAmount);
             var result = reversedSource.IndexOfSlice(that.Reverse(), comparer);
 
@@ -843,6 +851,23 @@ namespace Flinq
             }
 
             return result;
+            // ReSharper restore PossibleMultipleEnumeration
+        }
+
+        private static int LastIndexOfSliceExperimental<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
+        {
+            if (source == null) throw Error.ArgumentNull("source");
+            if (that == null) throw Error.ArgumentNull("that");
+            if (comparer == null) comparer = EqualityComparer<A>.Default;
+
+            // ReSharper disable PossibleMultipleEnumeration
+            var l = source.Count();
+            var tl = that.Count();
+            var clippedEnd = Math.Min(l - tl, end);
+            if (end < 0) return -1;
+            if (tl < 1) return clippedEnd;
+            if (l < tl) return -1;
+            return KmpSearchUtilities.KmpSearch(source, 0, clippedEnd + tl, that, 0, tl, comparer, forward: false);
             // ReSharper restore PossibleMultipleEnumeration
         }
 

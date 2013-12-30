@@ -75,11 +75,15 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new[] {1, 2}, 2, 5)]
-        [TestCase(2, new[] {2, 7}, 4, -1)]
-        [TestCase(3, new[] {2, 7}, 100, -1)]
-        [TestCase(4, new int[] {}, 4, 4)]
-        [TestCase(5, new int[] {}, -100, 0)]
+        [TestCase(1, new int[] { }, 4, 4)]
+        [TestCase(2, new int[] { }, 9, 9)]
+        [TestCase(3, new int[] { }, 10, 10, Ignored = true)]
+        [TestCase(4, new int[] { }, 11, -1)]
+        [TestCase(5, new int[] { }, -100, 0)]
+        [TestCase(6, new int[] { }, 100, -1)]
+        [TestCase(7, new[] { 1, 2 }, 2, 5)]
+        [TestCase(8, new[] {2, 7}, 4, -1)]
+        [TestCase(9, new[] {2, 7}, 100, -1)]
         public void IndexOfSliceWhenSourceSequenceIsNotAListSpecifyingFromWorks(int dummy, int[] that, int from, int expected)
         {
             var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
@@ -87,11 +91,15 @@ namespace FlinqTests
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new[] {1, 2}, 2, 5)]
-        [TestCase(2, new[] {2, 7}, 4, -1)]
-        [TestCase(3, new[] {2, 7}, 100, -1)]
-        [TestCase(4, new int[] {}, 4, 4)]
+        [TestCase(1, new int[] { }, 4, 4)]
+        [TestCase(2, new int[] { }, 9, 9)]
+        [TestCase(3, new int[] { }, 10, 10)]
+        [TestCase(4, new int[] { }, 11, -1)]
         [TestCase(5, new int[] { }, -100, 0)]
+        [TestCase(6, new int[] { }, 100, -1)]
+        [TestCase(7, new[] { 1, 2 }, 2, 5)]
+        [TestCase(8, new[] { 2, 7 }, 4, -1)]
+        [TestCase(9, new[] { 2, 7 }, 100, -1)]
         public void IndexOfSliceWhenSourceSequenceIsAListSpecifyingFromWorks(int dummy, int[] that, int from, int expected)
         {
             var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
