@@ -49,71 +49,99 @@ namespace FlinqTests
             Assert.That(ex4.ParamName, Is.EqualTo("that"));
         }
 
-        [TestCase(1, new int[] {}, 0)]
-        [TestCase(2, new[] {1}, 0)]
-        [TestCase(3, new[] {1, 2, 3}, 0)]
-        [TestCase(4, new[] {4, 5, 6}, 3)]
-        [TestCase(5, new[] {8, 9, 10}, 7)]
-        [TestCase(6, new[] {5, 5, 5}, -1)]
-        public void IndexOfSliceWhenSourceSequenceIsNotAListWorks(int dummy, int[] that, int expected)
+        [Test, TestCaseSource("TestCasesNotSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsNotAListWorks(int dummy, int[] source, int[] that, int expected)
         {
-            var source = System.Linq.Enumerable.Range(1, 10);
-            var actual = source.ToEnumerable().IndexOfSlice(that);
+            var actual = source.ToEnumerable().IndexOfSlice(that.ToEnumerable());
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new int[] {}, 0)]
-        [TestCase(2, new[] {1}, 0)]
-        [TestCase(3, new[] {1, 2, 3}, 0)]
-        [TestCase(4, new[] {4, 5, 6}, 3)]
-        [TestCase(5, new[] {8, 9, 10}, 7)]
-        [TestCase(6, new[] {5, 5, 5}, -1)]
-        public void IndexOfSliceWhenSourceSequenceIsAListWorks(int dummy, int[] that, int expected)
+        [Test, TestCaseSource("TestCasesNotSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsAListWorks(int dummy, int[] source, int[] that, int expected)
         {
-            var source = System.Linq.Enumerable.Range(1, 10);
-            var actual = source.ToList().IndexOfSlice(that);
+            var actual = source.ToList().IndexOfSlice(that.ToList());
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new int[] { }, 4, 4)]
-        [TestCase(2, new int[] { }, 9, 9)]
-        [TestCase(3, new int[] { }, 10, 10, Ignored = true)]
-        [TestCase(4, new int[] { }, 11, -1)]
-        [TestCase(5, new int[] { }, -100, 0)]
-        [TestCase(6, new int[] { }, 100, -1)]
-        [TestCase(7, new[] { 1, 2 }, 2, 5)]
-        [TestCase(8, new[] {2, 7}, 4, -1)]
-        [TestCase(9, new[] {2, 7}, 100, -1)]
-        public void IndexOfSliceWhenSourceSequenceIsNotAListSpecifyingFromWorks(int dummy, int[] that, int from, int expected)
+        [Test, TestCaseSource("TestCasesForNonEmptyThatSequenceSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsNotAListAndThatIsNotEmptySpecifyingFromWorks(int dummy, int[] source, int[] that, int from, int expected)
         {
-            var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
-            var actual = source.ToEnumerable().IndexOfSlice(that, from);
+            var actual = source.ToEnumerable().IndexOfSlice(that.ToEnumerable(), from);
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase(1, new int[] { }, 4, 4)]
-        [TestCase(2, new int[] { }, 9, 9)]
-        [TestCase(3, new int[] { }, 10, 10)]
-        [TestCase(4, new int[] { }, 11, -1)]
-        [TestCase(5, new int[] { }, -100, 0)]
-        [TestCase(6, new int[] { }, 100, -1)]
-        [TestCase(7, new[] { 1, 2 }, 2, 5)]
-        [TestCase(8, new[] { 2, 7 }, 4, -1)]
-        [TestCase(9, new[] { 2, 7 }, 100, -1)]
-        public void IndexOfSliceWhenSourceSequenceIsAListSpecifyingFromWorks(int dummy, int[] that, int from, int expected)
+        [Test, TestCaseSource("TestCasesForEmptyThatSequenceSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsNotAListAndThatIsEmptySpecifyingFromWorks(int dummy, int[] source, int[] that, int from, int expected)
         {
-            var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
-            var actual = source.ToList().IndexOfSlice(that, from);
+            var actual = source.ToEnumerable().IndexOfSlice(that.ToEnumerable(), from);
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void IndexOfSliceGivenTrickyCaseWorks()
+        [Test, TestCaseSource("TestCasesForNonEmptyThatSequenceSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsAListAndThatIsNotEmptySpecifyingFromWorks(int dummy, int[] source, int[] that, int from, int expected)
         {
-            var source = new[] {1, 1, 2, 1, 1, 1, 2, 3, 4, 5};
-            var that = new[] {1, 1, 1, 2};
-            var actual = source.IndexOfSlice(that);
-            Assert.That(actual, Is.EqualTo(3));
+            var actual = source.ToList().IndexOfSlice(that.ToList(), from);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test, TestCaseSource("TestCasesForEmptyThatSequenceSpecifyingFrom")]
+        public void IndexOfSliceWhenSourceSequenceIsAListAndThatIsEmptySpecifyingFromWorks(int dummy, int[] source, int[] that, int from, int expected)
+        {
+            var actual = source.ToList().IndexOfSlice(that.ToList(), from);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static object[] TestCasesNotSpecifyingFrom
+        {
+            get
+            {
+                var source = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                return new object[]
+                    {
+                        new object[] {1, source, new int[] {}, 0},
+                        new object[] {2, source, new[] {1}, 0},
+                        new object[] {3, source, new[] {1, 2, 3}, 0},
+                        new object[] {4, source, new[] {4, 5, 6}, 3},
+                        new object[] {5, source, new[] {8, 9, 10}, 7},
+                        new object[] {6, source, new[] {5, 5, 5}, -1}
+                    };
+            }
+        }
+
+        private static object[] TestCasesForNonEmptyThatSequenceSpecifyingFrom
+        {
+            get
+            {
+                var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
+                var that = new[] {2, 7};
+                return new object[]
+                    {
+                        new object[] {1, source, that, 0, 2},
+                        new object[] {2, source, that, 2, 2},
+                        new object[] {3, source, that, 4, -1},
+                        new object[] {4, source, that, 100, -1},
+                        new object[] {5, source, that, -100, 2}
+                    };
+            }
+        }
+
+        private static object[] TestCasesForEmptyThatSequenceSpecifyingFrom
+        {
+            get
+            {
+                var source = new[] {1, 1, 2, 7, 1, 1, 2, 3, 4, 5};
+                var that = new int[] {};
+                return new object[]
+                    {
+                        new object[] {1, source, that, 0, 0},
+                        new object[] {2, source, that, 4, 4},
+                        new object[] {3, source, that, 9, 9},
+                        new object[] {4, source, that, 10, 10},
+                        new object[] {5, source, that, 11, -1},
+                        new object[] {6, source, that, 100, -1},
+                        new object[] {7, source, that, -100, 0}
+                    };
+            }
         }
 
         // TODO: add testcases using a non-default comparer...

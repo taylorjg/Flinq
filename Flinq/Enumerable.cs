@@ -754,6 +754,12 @@ namespace Flinq
             }
 
             // ReSharper disable PossibleMultipleEnumeration
+            if (that.IsEmpty())
+            {
+                var sourceLength = source.Count();
+                return (clippedFrom <= sourceLength) ? clippedFrom : -1;
+            }
+
             var index = clippedFrom;
             var seq = source.Skip(clippedFrom);
             for (; ; )
