@@ -24,14 +24,14 @@ namespace Flinq
 
             if (n1 == n0 + 1)
             {
-                return forward
-                    ? ClipR(s.IndexOf(w.ElementAt(n0), m0), m1)
-                    : ClipL(s.LastIndexOf(w.ElementAt(n0), m1 - 1), m0 - 1);
+                return (forward)
+                    ? ClipR(s.IndexOf(w.ElementAt(n0), m0, comparer), m1)
+                    : ClipL(s.LastIndexOf(w.ElementAt(n0), m1 - 1, comparer), m0 - 1);
             }
 
             if (m1 - m0 == n1 - n0)
             {
-                if (s.Slice(m0, m1).SequenceEqual(w.Slice(n0, n1)))
+                if (s.Slice(m0, m1).SequenceEqual(w.Slice(n0, n1), comparer))
                     return m0;
                 return -1;
             }
@@ -73,7 +73,7 @@ namespace Flinq
             {
                 var wOpt = KmpOptimisedWord(w, n0, n1, forward: true);
                 var jumpTable = KmpJumpTable(wOpt, n1 - n0, comparer);
-                var cache = new B[n1 = n0];
+                var cache = new B[n1 - n0];
                 var largest = 0;
                 var i = 0;
                 var m = 0;

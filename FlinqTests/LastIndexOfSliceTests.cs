@@ -90,6 +90,7 @@ namespace FlinqTests
         [TestCase(6, "SS", 7, -1)]
         [TestCase(7, "SL", 3, 2)]
         [TestCase(8, "SL", 4, 4)]
+        [TestCase(9, "LMSLSLM", 7, 0)]
         public void LastIndexOfSliceUsingAnExplicitComparerWorks(int dummy, string deskSizes, int end, int expected)
         {
             var source = EmployeeCollectionBuilder.Build("LMSLSLM");

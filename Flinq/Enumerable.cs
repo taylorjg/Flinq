@@ -710,26 +710,6 @@ namespace Flinq
         public static int IndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
         {
             return IndexOfSliceExperimental(source, that, from, comparer);
-
-            //if (source == null) throw Error.ArgumentNull("source");
-            //if (that == null) throw Error.ArgumentNull("that");
-
-            //// TODO: If source is indexable, then we could/should employ the Knuth–Morris–Pratt algorithm
-            //// http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
-
-            //var clippedFrom = Math.Max(0, from);
-
-            //// ReSharper disable PossibleMultipleEnumeration
-            //var index = clippedFrom;
-            //var seq = source.Skip(clippedFrom);
-            //for (; ; )
-            //{
-            //    if (seq.IsEmpty()) return -1;
-            //    if (seq.StartsWith(that, comparer)) return index;
-            //    seq = seq.Tail();
-            //    index++;
-            //}
-            //// ReSharper restore PossibleMultipleEnumeration
         }
 
         private static int IndexOfSliceExperimental<A>(this IEnumerable<A> source, IEnumerable<A> that, int from, IEqualityComparer<A> comparer)
@@ -831,33 +811,7 @@ namespace Flinq
         /// <returns>The last index &lt;= <paramref name="end" /> such that the elements of this list starting at this index match the elements of sequence <paramref name="that" />, or -1 of no such subsequence exists.</returns>
         public static int LastIndexOfSlice<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
         {
-            //return LastIndexOfSliceExperimental(source, that, end, comparer);
-
-            if (source == null) throw Error.ArgumentNull("source");
-            if (that == null) throw Error.ArgumentNull("that");
-
-            if (end < 0) return -1;
-
-            // ReSharper disable PossibleMultipleEnumeration
-            var sourceLength = source.Count();
-            var thatLength = that.Count();
-
-            var clippedEnd = Math.Min(sourceLength - thatLength, end);
-            if (thatLength == 0) return clippedEnd;
-
-            if (sourceLength < thatLength) return -1;
-
-            var skipAmount = sourceLength - thatLength - clippedEnd;
-            var reversedSource = source.Reverse().Skip(skipAmount);
-            var result = reversedSource.IndexOfSlice(that.Reverse(), comparer);
-
-            if (result >= 0)
-            {
-                result = sourceLength - thatLength - result - skipAmount;
-            }
-
-            return result;
-            // ReSharper restore PossibleMultipleEnumeration
+            return LastIndexOfSliceExperimental(source, that, end, comparer);
         }
 
         private static int LastIndexOfSliceExperimental<A>(this IEnumerable<A> source, IEnumerable<A> that, int end, IEqualityComparer<A> comparer)
