@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlinqTests.Builders;
 using FlinqTests.SampleDomainClasses;
 using NUnit.Framework;
@@ -91,11 +92,28 @@ namespace FlinqTests
         [TestCase(7, "SL", 3, 2)]
         [TestCase(8, "SL", 4, 4)]
         [TestCase(9, "LMSLSLM", 7, 0)]
-        public void LastIndexOfSliceUsingAnExplicitComparerWorks(int dummy, string deskSizes, int end, int expected)
+        public void LastIndexOfSliceWhenSourceSequenceIsNotAListUsingAnExplicitComparerWorks(int dummy, string deskSizes, int end, int expected)
         {
             var source = EmployeeCollectionBuilder.Build("LMSLSLM");
             var that = EmployeeCollectionBuilder.Build(deskSizes);
-            var actual = source.LastIndexOfSlice(that, end, new EmployeeDeskSizeComparer());
+            var actual = source.ToEnumerable().LastIndexOfSlice(that.ToEnumerable(), end, new EmployeeDeskSizeComparer());
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [TestCase(1, "", 7, 7)]
+        [TestCase(2, "", 6, 6)]
+        [TestCase(3, "M", 7, 6)]
+        [TestCase(4, "LM", 7, 5)]
+        [TestCase(5, "SL", 7, 4)]
+        [TestCase(6, "SS", 7, -1)]
+        [TestCase(7, "SL", 3, 2)]
+        [TestCase(8, "SL", 4, 4)]
+        [TestCase(9, "LMSLSLM", 7, 0)]
+        public void LastIndexOfSliceWhenSourceSequenceIsAListUsingAnExplicitComparerWorks(int dummy, string deskSizes, int end, int expected)
+        {
+            var source = EmployeeCollectionBuilder.Build("LMSLSLM");
+            var that = EmployeeCollectionBuilder.Build(deskSizes);
+            var actual = source.ToList().LastIndexOfSlice(that.ToList(), end, new EmployeeDeskSizeComparer());
             Assert.That(actual, Is.EqualTo(expected));
         }
     }
