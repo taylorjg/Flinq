@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/phi20nmc58ra8s6m/branch/master?svg=true)](https://ci.appveyor.com/project/taylorjg/flinq/branch/master)
 
 ## Flinq
 
